@@ -1018,10 +1018,8 @@
     <Content Include="Views\Commissions\Details.cshtml" />
     <Content Include="Views\Commissions\Edit.cshtml" />
     <Content Include="Views\Commissions\Index.cshtml" />
-    <Content Include="Views\Font - Copy\Index.cshtml" />
     <Content Include="Views\Front\Clients.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
-    <Content Include="Views\Front\Clients - Copy.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
