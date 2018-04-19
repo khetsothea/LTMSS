@@ -1,0 +1,301 @@
+﻿@model IEnumerable<LTMS.Models.Lotteries.tblResultSA>
+@{ ViewBag.Title = "Index"; Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="wrapper">
+    @Html.Partial("~/Views/Shared/Partails/_PartialHeader.cshtml");
+    <!-- Left side column. contains the logo and sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialLSidebar.cshtml");
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="col-xs-4">
+                <div class="input-group date row">
+                    <div class="input-group-addon hidden-xs">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right datepicker" id="datepicker">
+                </div>
+                <!-- /.input group -->
+            </div>
+            <div class="left float-left" style="float:left; width:89px;">
+                <select class="sp-input" id="sp-agency"></select>
+            </div>
+            <div class="left float-left" style="float:left; width:58px;">
+                <select id="dpShift"><option value="1">ល្ងាច</option><option value="2">យប់</option></select>
+            </div>
+
+            <div class="left float-left" style="float:left; width:40px;">
+                <button class="btn" id="btnFind">OK</button>
+                <!-- /.input group -->
+            </div>
+            <div class="row no-print">
+                <div class="col-xs-12">
+                    <button class="btn btn-default" onclick="printDiv()"><i class="fa fa-print"></i> Print</button>
+
+                </div>
+            </div>
+        </section>
+        <!-- Main content -->
+        <section class="invoice" id="DivIdToPrint">
+            <div id="fdisplay">
+
+            </div>
+           <div class="clearfix"></div>
+        </section>
+        <!-- /.content -->
+
+    </div>
+    @*Modal*@
+
+    @*End Modal*@
+    <!-- /.content-wrapper -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialFooter.cshtml");
+    <!-- Control Sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialRSidebar.cshtml");
+    <!-- /.control-sidebar -->
+</div>
+
+@section Scripts
+{
+    <div>
+        <script src="~/Scripts/spjs/spHelpers.js"></script>
+        <script>
+         var GPROID = '@ViewBag.ID';
+        function dRemove(event) {
+            var id = event.closest('.RDisplay'); //("..RDisplay");
+            // alert();
+            id.remove();
+        }
+
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        //var today1 = date.getDay() + '-' + date.getMonth() + '-' + date.getYear();
+
+        var end = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+        $('#datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+        });
+
+        $(document).ready(function (event) {
+
+            var date = new Date();
+            $('.sp-input').removeClass('spselected');
+            $("#txtNum").addClass("spselected");
+            // GET YYYY, MM AND DD FROM THE DATE OBJECT
+            var yyyy = date.getFullYear().toString();
+            var mm = (date.getMonth() + 1).toString();
+            var dd = date.getDate().toString();
+
+            // CONVERT mm AND dd INTO chars
+            var mmChars = mm.split('');
+            var ddChars = dd.split('');
+
+            // CONCAT THE STRINGS IN YYYY-MM-DD FORMAT
+            var datestring = yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+            $("#datepicker").val(datestring);
+            var url = "/UtiHelper/_getOptionListByKeyOder";
+            var id = 3;
+            data = JSON.stringify({ id: null });
+            dpObject = $("#sp-agency");
+            fechOption(dpObject, url, null, "Agencies", "AgencyID", "AgencyName", "AgencyID", "AgencyID", "ASC", '<option value="0"> --ភ្នាក់ងារ-- </option>');
+
+            $("#btnFind").click(function (event) {
+                loanPlay();
+            });
+
+        });
+        function loanPlay() {
+            $("#fdisplay").html("");
+            var validate = true;
+            if (validate == false) {
+                alert('false');
+                return;
+            } else {
+
+                var error_free = true;
+                var url = "/Manage/_LoadDoc";
+                //alert(url);
+                if (!error_free) {
+                    //event.preventDefault();
+                }
+                else {
+
+                    var HORGADDID = $('#HORGADDID').val();
+                    var _Date = $('#datepicker').val();
+                    var Shift = $("#dpShift").val();
+                    var Session = 1;//$("#sp-session").val();
+                    var CustomerID = $("#sp-agency").val();
+                    data = {
+                        "PlayDate": _Date
+                        , "Shift": Shift
+                        , "Session": Session
+                        , "CustomerID": CustomerID
+                    }
+
+                    $.post(url, data, function (data) {
+                        //  alert(data);
+                        if (data.Status == "OK") {
+                            // PlayID
+                            var _post = '';
+                            var _PDisplay = "";
+                            var i = 0;
+                            var _t = data.Total;
+                            var j = 1;
+                            var st = "";
+                            $.each(data.Result, function (i, item) {
+                                //alert(item.PlayID);
+                                st = item.SPlayAmount;
+                                var dcount = data.Result.length;
+                                if (_post != item.Post) {
+
+                                    _PDisplay += '<div class="RDisplay" id="' + item.PlayID + '" style="padding:5px;">' +
+                                                '	<table class=" sptb-display" id="' + item.Post + '">' +
+                                                '                    <table class="text-right pull-right" id="B">' +
+                                                '                        <thead>' +
+                                                '                            <tr>' +
+                                                '                                <td colspan="3">' +
+                                                '                                    <div class="dSession" onclick="dRemove(this);"' +
+                                                '                                         style="padding-right:20px; font:larger; text-align:left; font-weight:bolder;">(' + item.Session + ')' +
+                                                '                                            <span class="dPost" data-value="3">' + item.Post + '</span>' +
+                                                '                                        <i class="glyphicon glyphicon-remove text-red dRemove" style="display:none;"></i>' +
+                                                '                                    </div>' +
+                                                '                                </td>' +
+                                                '                            </tr>' +
+                                                '                        </thead>' +
+                                                '		<tbody>';
+
+                                    if (item.PlayType == 1) {
+                                        _PDisplay += '                            <tr style="' + item.FColor + '">' +
+                                                    '                                <td>' + item.Number + '</td>' +
+                                                    '                                <td>:</td>' +
+                                                    '                                <td>' + item.PlayAmount + ' ៛ </td>' +
+                                                    '                            </tr>';
+                                    } else if (item.PlayType == 2) {
+                                        _PDisplay += '			<tr style="' + item.FColor + '">' +
+                                                '				<td>' + item.Number + '</td>' +
+                                                '				<td>:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '				</tr>' +
+                                                '				<td><span><i class="fa fa-long-arrow-down"></i></span></td>' +
+                                                '				<td>(' + item.NumIncrease + '):</td>' +
+                                                '				<td><span><i class="fa fa-long-arrow-down"></i></span></td>' +
+                                                '				</tr>' +
+                                                '			<tr style="' + item.FColor + '">' +
+                                                '				<td>' + item.Number1 + '</td>' +
+                                                '				<td>:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '		    </tr>';
+                                    } else if (item.PlayType == 5) {
+                                        _PDisplay += '			<tr style="' + item.FColor + '">' +
+                                                '				<td>' + item.Number + '</td>' +
+                                                '				<td>x:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '				</tr>';
+                                    }
+
+                                }
+                                else {
+
+                                    if (item.PlayType == 1) {
+                                        _PDisplay += '			<tr style="' + item.FColor + '">' +
+                                                    '				<td>' + item.Number + '</td>' +
+                                                    '				<td>:</td>' +
+                                                    '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                    '			</tr>';
+                                    } else if (item.PlayType == 2) {
+                                        _PDisplay += '			<tr style="' + item.FColor + '">' +
+                                                '				<td>' + item.Number + '</td>' +
+                                                '				<td>:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '				</tr>' +
+                                                '				<tr style="' + item.FColor + '"><td><span><i class="fa fa-long-arrow-down"></i></span></td>' +
+                                                '				<td>(' + item.NumIncrease + '):</td>' +
+                                                '				<td><span><i class="fa fa-long-arrow-down"></i></span></td>' +
+                                                '				</tr>' +
+                                                '			<tr style="' + item.FColor + '">' +
+                                                '				<td>' + item.Number1 + '</td>' +
+                                                '				<td>:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '		    </tr>';
+                                    } else if (item.PlayType == 5) {
+                                        _PDisplay += '			<tr style="' + item.FColor + '">' +
+                                                '				<td>' + item.Number + '</td>' +
+                                                '				<td>x:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '				</tr>';
+                                    }
+                                }
+
+                                _post = item.Post;
+                                i = i + 1;
+                                //alert(i + ':' + dcount);
+                                if (j == item.Slast) {
+                                    _PDisplay += '		</tbody>' +
+                                      '                        <tfoot>' +
+                                      '                            <tr>' +
+                                      '                                <td colspan="3" style="border: 1px solid;padding-left: 15px;padding-right: 15px;padding-top: 5px;padding-bottom: 5px;">' +
+                                      '                                    <div>' + item.SPlayAmount + '</div>' +
+                                      '                                </td>' +
+                                      '                            </tr>' +
+                                      '                        </tfoot>' +
+                                      '	</table>' +
+                                      '</div>';
+                                    j = 1;
+                                } else {
+                                    j += 1;
+                                }
+                            });
+
+                            if (i > 0) {
+                                _PDisplay += '		</tbody>' +
+                                            '                        <tfoot>' +
+                                            '                            <tr>' +
+                                            '                                <td colspan="3" style="border: 1px solid;padding-left: 15px;padding-right: 15px;padding-top: 5px;padding-bottom: 5px;">' +
+                                            '                                    <div>' + item.SPlayAmount + '</div>' +
+                                            '                                </td>' +
+                                            '                            </tr>' +
+                                            '                        </tfoot>' +
+                                            '	</table>' +
+                                            '</div>';
+
+                            }
+                            $("#fdisplay").html("");
+                            $("#fdisplay").html(_PDisplay);
+                            var _totalString = '<p class="pSessionline"> </p>' +
+                                                '<div class="dSession" style="padding-right:20px; font:larger; clear:both;">' +
+                                                '	<table class=" sptb-display" id="tblTotal">' +
+                                                '		<tbody>' +
+                                                '			<tr>' +
+                                                '				<td>សរ</td>' +
+                                                '				<td>=</td>' +
+                                                '				<td>' + _t + '</td>' +
+                                                '				<td></td>' +
+                                                '			</tr>' +
+                                                '			<tr>' +
+                                                '				<td>100</td>' +
+                                                '				<td>:</td>' +
+                                                '				<td>' + _t + '</td>' +
+                                                '				<td></td>' +
+                                                '			</tr>' +
+                                                '		</tbody>' +
+                                                '	</table>' +
+                                                '</div>';
+                            if (_t != 0) {
+                                  //$("#fdisplay").append(_totalString);
+                            }
+
+                        } else {
+                            alert(data.Result);
+                            //$('#dialogOrgMember #dialogContent').scrollTop(0);
+                        }
+                    });
+                }
+            }
+            return false;
+        }
+        </script>
+    </div>
+
+}

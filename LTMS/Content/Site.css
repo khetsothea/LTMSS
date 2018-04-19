@@ -1,0 +1,85 @@
+﻿body {
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
+    font-family:hanuman,"Khmer OS",'Khmer OS Content' !important;
+}
+
+.f-xlarge{
+    font-size:x-large !important;
+}
+.f-xxlarge {
+    font-size:xx-large !important;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+    font-family:hanuman,"Khmer OS",'Khmer OS Content' !important;
+
+}
+.skin-blue , .sidebar-mini{
+    font-family:hanuman;
+}
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+*/
+
+/* Set width on the form input elements since they're 100% wide by default/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+.spt-user{
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100px;
+    text-overflow: ellipsis;
+}
+
+.spselected{
+    /*color: #fff;*/
+    background-color: #ec971f !important;
+    border-color: #d58512;
+}
+#fdisplay{
+    min-height:190px;
+    border-top:1px solid #ccc;
+    border-right:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+}
+/*.sptb-display {
+    width:100%;
+}*/
+.sptb-display tfoot {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.sptb-display td {
+    text-align:right;
+}
+.LDisplay {
+    /*border-bottom:1px solid #ccc;*/
+    width:100%;
+    clear:both;
+}
+.focusedInput {
+    border-color: #ec971f;
+    outline: 0;
+    outline: thin dotted;
+    -moz-box-shadow: 0 0 8px #d58512;
+    box-shadow: 0 0 8px #d58512 !important;
+}
+.RDisplay{
+    float:left;
+    padding:10px;
+    margin:10px;
+    /*clear:left;*/
+}
+span.dRemove{
+    padding:4px;
+}

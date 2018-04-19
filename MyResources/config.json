@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "MyResources"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-MyResources-ecbe8982-87d0-48c3-ba42-3641d3632db7;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}

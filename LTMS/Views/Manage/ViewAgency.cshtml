@@ -1,0 +1,553 @@
+﻿@model  LTMS.Models.Lotteries.ViewModels.ViewAgencyCustom
+@{ ViewBag.Title = "Index"; Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="wrapper">
+    @Html.Partial("~/Views/Shared/Partails/_PartialHeader.cshtml");
+    <!-- Left side column. contains the logo and sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialLSidebar.cshtml");
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>@ViewBag.PlayAmountSA</h3>
+                            <p>ចំនួនទឹកប្រាក់​ចាក់ពេលល្ងាច</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>@ViewBag.PlayAmountSE</h3>
+                            <p>ចំនួនទឹកប្រាក់​ចាក់ពេលយប់</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>0</h3>
+                            <p>ចំនួនទឹកប្រាក់ជំពាក់</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-files-o"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Main content -->
+        <section class="col-lg-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <div class="pull-left">
+                        @*<button type="button" id="btnShift" data-value="1" data-toggle="modal" data-target="#mShift"
+                                class="btn btn-sm">
+                            <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>កូនក្រដាសថ្មី</span>
+                        </button>*@
+                        <p></p>
+                    </div>
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-sm close pull-right" data-widget="collapse" aria-label="Close">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="container-fluid text-center dataTables_scrollBody">
+                        <div class="row">
+                            <form>
+                                        <!-- content goes here -->
+
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @foreach (var item in Model.ListAgency)
+                                        {
+                                        <div class="form-group hidden">
+                                            @Html.LabelFor(model => model.ViewAgency.AgencyID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            @item.AgencyID
+                                            <div class="col-md-8">
+                                                @*@Html.EditorFor(modelItem => item.AgencyID, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                 <input class="form-control text-box single-line" data-val="true" data-val-length="The field AgencyName must be a string with a maximum length of 500." data-val-length-max="500" id="ViewAgency_AgencyID" name="ViewAgency.AgencyName" type="text" value="@item.AgencyID">
+                                                 @Html.ValidationMessageFor(model => model.ViewAgency.AgencyID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ViewAgency.AgencyName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.ViewAgency.AgencyName, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                @Html.ValidationMessageFor(model => model.ViewAgency.AgencyName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ViewAgency.AgencyNickname, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.ViewAgency.AgencyNickname, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ViewAgency.AgencyNickname, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        @*<div class="form-group">
+                                            @Html.LabelFor(model => model.ViewAgency.GenderID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.ViewAgency.GenderID, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ViewAgency.GenderID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>*@
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ViewAgency.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.ViewAgency.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ViewAgency.PhoneNumber, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        @*<div class="form-group">
+                                            @Html.LabelFor(model => model.ViewAgency.Address, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.ViewAgency.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ViewAgency.Address, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>*@
+
+                                        @*<div class="form-group">
+                                            @Html.LabelFor(model => model.ViewAgency.StatusID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                 @Html.EditorFor(model => model.vAgency.vAgency.Status, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.DropDownList("StatusID", ViewBag.SLStatus as SelectList)
+                                                @Html.DropDownListFor(m => m.ViewAgency.StatusID, new SelectList(ViewBag.SLStatus, "StatusID", "StatusDisc"))
+                                                @Html.ValidationMessageFor(model => model.ViewAgency.StatusID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>*@
+                                      @*<div class="form-group">
+                                            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <div class="checkbox">
+                                                    @Html.EditorFor(model => model.IsDeleted)
+                                                    @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                        <div class="clearfix"></div>
+                                        }
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+                <div class="box-footer with-border">
+                    <div class="pull-right">
+                        <button type="button" id="btnSaveAgInfo" data-value="1" class="btn btn-sm">
+                            <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>រក្សាទុក</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <section class="box col-lg-6" id="box-commision">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <div class="pull-left">
+                        @*<button type="button" id="btnShift" data-value="1" data-toggle="modal" data-target="#mShift"
+                                class="btn btn-sm">
+                            <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>កូនក្រដាសថ្មី</span>
+                        </button>*@
+                        <p></p>
+                    </div>
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-sm close pull-right" data-widget="collapse" aria-label="Close">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="container-fluid text-center dataTables_scrollBody">
+                        <div class="row">
+
+                                <table class="table table-bordered table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>ពេល</th>
+                                            <th>គុណទឹក២លេខ</th>
+                                            <th>គុណទឹក៣លេខ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>ល្ងាច</td>
+                                            <td><input type="text" id="S1X2" name="S1X2" class="form-control" /> %</td>
+                                            <td><input type="text" id="S1X3" name="S1X3"  class="form-control" /> %</td>
+                                        </tr>
+                                        <tr>
+                                            <td>យប់</td>
+                                            <td><input type="text" id="S2X2" name="S2X2"  class="form-control" /> %</td>
+                                            <td><input type="text" id="S2X3" name="S2X3"  class="form-control" /> %</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            <table class="table table-bordered table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>ពេល</th>
+                                        <th>សង២លេខ</th>
+                                        <th>សង៣លេខ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ល្ងាច</td>
+                                        <td><input type="text" id="RS1X2" name="RS1X2" class="form-control" /></td>
+                                        <td><input type="text" id="RS1X3" name="RS1X3" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>យប់</td>
+                                        <td><input type="text" id="RS2X2" name="RS2X2" class="form-control" /></td>
+                                        <td><input type="text" id="RS2X3" name="RS2X3" class="form-control" /></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+</div>
+                    </div>
+                </div>
+                <!-- /.box -->
+                <div class="box-footer with-border">
+                    <div class="pull-right">
+                        <button type="button" id="btnSaveMCInfo" data-value="1" data-target="#btnSaveMCInfo"
+                                class="btn btn-sm">
+                            <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>រក្សាទុក</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    @*Modal*@
+    <div class="modal fade" id="mShift" role="dialog">
+        <div class="modal-dialog modal-md">
+            <form>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h3 class="modal-title" id="lineModalLabel"></h3>
+                    </div>
+                    <div class="modal-body">
+                        <!-- content goes here -->
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group hidden">
+                            @Html.LabelFor(model => model.vAgency.AgencyID, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.vAgency.AgencyID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.vAgency.AgencyID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.vAgency.AgencyName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.vAgency.AgencyName, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.vAgency.AgencyName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.vAgency.AgencyNickname, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.vAgency.AgencyNickname, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.vAgency.AgencyNickname, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.vAgency.GenderID, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.vAgency.GenderID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.vAgency.GenderID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.vAgency.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.vAgency.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.vAgency.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.vAgency.Address, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.vAgency.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.vAgency.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.vAgency.StatusID, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @* @Html.EditorFor(model => model.vAgency.vAgency.Status, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @*@Html.DropDownList("Status", ViewBag.SLStatus as SelectList)*@
+                                @Html.ValidationMessageFor(model => model.vAgency.StatusID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.IsDeleted)
+                                        @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="clearfix"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" role="button">បិទ</button>
+                            </div>
+                            <div class="btn-group btn-delete hidden" role="group">
+                                <button type="button" id="btnClose" name="btnClose" class="btn btn-default btn-hover-red" data-dismiss="modal" role="button">បិទ</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" id="btnSave" name="btnSave" class="btn btn-default btn-hover-green" data-action="save" role="button">រក្សាទុក</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    @*End Modal*@
+    <!-- /.content-wrapper -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialFooter.cshtml");
+    <!-- Control Sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialRSidebar.cshtml");
+    <!-- /.control-sidebar -->
+</div>
+
+@section Scripts
+{
+    <div>
+        <script>
+         var GPROID = '@ViewBag.ID';
+        function dRemove(event) {
+            var id = event.closest('.LDisplay'); //("..LDisplay");
+            // alert();
+            id.remove();
+        }
+        $(document).ready(function (event) {
+
+            var d = new Date();
+            var strDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+            if (GPROID > 0) {
+                //alert(GPROID);
+                var url = "/Manage/_AgencList";
+                var _data = {
+                    "id": GPROID
+                }
+                // alert(_data.PROID);
+                $.post(url, _data, function (data) {
+                    if (data.Result == "OK") {
+                        //alert(data.Result);
+                        $.each(data.Records, function (index, itemData) {
+                            //$("#SingWith").val(2);
+                            //alert(itemData.AgencyName);
+                            $("#ViewAgency_AgencyName").val(itemData.AgencyName);
+                            $("#ViewAgency_AgencyNickname").val(itemData.AgencyNickname);
+                            $("#ViewAgency_GenderID").val(itemData.GenderID);
+                            $("#ViewAgency_PhoneNumber").val(itemData.PhoneNumber);
+                            $("#ViewAgency_Address").val(itemData.Address);
+                        });
+
+                    } else {
+                        alert(data.Message);
+                    }
+                });
+
+                //
+                //alert(GPROID);
+                var url = "/Manage/_AgenCMList";
+                var _data = {
+                    "id": GPROID
+                }
+                // alert(_data.PROID);
+                $.post(url, _data, function (data) {
+                    if (data.Result == "OK") {
+                        //alert(data.Result);
+                        $.each(data.Records, function (index, itemData) {
+                            $("#S1X2").val(itemData.S1X2);
+                            $("#S1X3").val(itemData.S1X3);
+                            $("#S2X2").val(itemData.S2X2);
+                            $("#S2X3").val(itemData.S2X3);
+                            $("#RS1X2").val(itemData.RS1X2);
+                            $("#RS1X3").val(itemData.RS1X3);
+                            $("#RS2X2").val(itemData.RS2X2);
+                            $("#RS2X3").val(itemData.RS2X3);
+                        });
+                    } else {
+                        alert(data.Message);
+                    }
+                });
+
+            }
+
+            $("#btnSaveAgInfo").click(function (event) {
+                event.preventDefault();
+                //alert("btnSaveAgInfo");
+                var validate = true;
+
+
+                if (validate == false) {
+                    alert('false');
+                    return;
+
+                } else {
+
+                    var error_free = true;
+                    var url = "/Manage/_editAgency";
+                    //alert(url);
+                    if (!error_free) {
+                        event.preventDefault();
+                    }
+                    else {
+                        //alert('No errors: Form will be submitted');
+                        event.preventDefault();
+                        var AgencyID = $('#ViewAgency_AgencyID').val();
+                        AgencyName = $("#ViewAgency_AgencyName").val();
+                        AgencyNickname = $('#ViewAgency_AgencyNickname').val();
+                        PhoneNumber = $('#ViewAgency_PhoneNumber').val();
+                        GenderID = $('#ViewAgency_GenderID').val();
+                        Address = $('#ViewAgency_Address').val();
+                        StatusID = $("#Status").val();
+                        if (AgencyID == null || AgencyID < 0) {
+                            alert('@LTMS.Languages.Resource.Data  @LTMS.Languages.Resource.WrongEntry');
+                            return;
+                        }
+                        data = {
+                            "AgencyID": AgencyID
+                            , "AgencyName": AgencyName
+                            , "AgencyNickname": AgencyNickname
+                            , "PhoneNumber": PhoneNumber
+                            , "GenderID": GenderID
+                            , "Address": Address
+                            , "StatusID": StatusID
+                        }
+
+                        $.post(url, data, function (data) {
+                            //  alert(data);
+                            if (data.Result == "OK") {
+                                //alert(data.Result);
+                            } else {
+                                alert(data.Result);
+                                //$('#dialogOrgMember #dialogContent').scrollTop(0);
+                            }
+
+                        });
+
+
+                    }
+                }
+
+            });
+
+            $("#btnSaveMCInfo").click(function (event) {
+                event.preventDefault();
+                //alert("btnSaveAgInfo");
+                var validate = true;
+
+
+                if (validate == false) {
+                    alert('false');
+                    return;
+
+                } else {
+
+                    var error_free = true;
+                    var url = "/Manage/_SaveAgencyCM";
+                    //alert(url);
+                    if (!error_free) {
+                        event.preventDefault();
+                    }
+                    else {
+                        //alert('No errors: Form will be submitted');
+                        event.preventDefault();
+                        var AgencyID = $('#ViewAgency_AgencyID').val();
+                        S1X2 = $("#S1X2").val();
+                        S1X3 = $('#S1X3').val();
+                        S2X2 = $('#S2X2').val();
+                        S2X3 = $('#S2X3').val();
+                        RS1X2 = $("#RS1X2").val();
+                        RS1X3 = $('#RS1X3').val();
+                        RS2X2 = $('#RS2X2').val();
+                        RS2X3 = $('#RS2X3').val();
+
+                        data = {
+
+                            "AgencyID": AgencyID
+                            , "S1X2": S1X2
+                            , "S1X3": S1X3
+                            , "S2X2": S2X2
+                            , "S2X3": S2X3
+                            , "RS1X2": RS1X2
+                            , "RS1X3": RS1X3
+                            , "RS2X2": RS2X2
+                            , "RS2X3": RS2X3
+
+                        }
+
+                        $.post(url, data, function (data) {
+                            //  alert(data);
+                            if (data.Result == "OK") {
+                                alert(data.Message);
+                                window.location.href='/Manage/Agency';
+                            } else {
+                                alert(data.Result);
+                                //$('#dialogOrgMember #dialogContent').scrollTop(0);
+                            }
+
+                        });
+
+
+                    }
+                }
+
+            });
+        });
+        </script>
+    </div>
+
+}

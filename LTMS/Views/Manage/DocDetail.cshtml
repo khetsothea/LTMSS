@@ -1,0 +1,422 @@
+﻿@model IEnumerable<LTMS.Models.Lotteries.ViewModels.v_PlayDetail>
+@{ ViewBag.Title = "Index"; Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="wrapper">
+    @Html.Partial("~/Views/Shared/Partails/_PartialHeader.cshtml");
+    <!-- Left side column. contains the logo and sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialLSidebar.cshtml");
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="col-xs-3">
+                <div class="input-group date row">
+                    <div class="input-group-addon hidden-xs">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" name="FDate" class="form-control pull-right datepicker" id="FDate">
+                </div>
+                <!-- /.input group -->
+            </div>
+            <div class="col-xs-3">
+                <div class="input-group date row">
+                    <div class="input-group-addon  hidden-xs">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" name="TDate" class="form-control pull-right datepicker" id="TDate">
+                </div>
+                <!-- /.input group -->
+            </div>
+            <div class="left float-left" style="float:left; width:89px;">
+                <select id="AgencyID" name="AgencyID"></select>
+            </div>
+            <div class="left float-left">
+                <button class="btn" id="btnSearch" onclick="LoadList()">
+                    <i class="glyphicon glyphicon-search"></i><span class="hidden-xs">ស្វែងរក</span>
+                </button><!-- /.input group -->
+            </div>
+            <div>
+                
+                <div class="left" style="float:left;">
+                    <button type="button" id="btnPay" data-value="1" data-toggle="modal" data-target="#mPay"
+                            class="btn btn-sm">
+                        <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>កូនសង</span>
+                    </button>
+                    <!-- /.input group -->
+                </div>
+                <div class="left" style="width:70px; float:left;">
+                    @*<button class="btn" id="btnSearch" onclick="Lend()">កូនខ្ចី</button>*@
+                    <button type="button" id="btnPay" data-value="1" data-toggle="modal" data-target="#modalL"
+                            class="btn btn-sm">
+                        <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>កូនខ្ចី</span>
+                    </button>
+                    <!-- /.input group -->
+                </div>
+            </div>
+            <div class="row no-print">
+                <div class="col-xs-12">
+                    <button class="btn btn-default" onclick="printDiv()"><i class="fa fa-print"></i> Print</button>
+
+                </div>
+            </div>
+        </section>
+        <!-- Main content -->
+        <section class="invoice" id="DivIdToPrint">
+            <!-- title row -->
+            <!-- info row -->
+            <div class="LDisplay" id="1" style="padding:5px;">
+                <table class="table table-responsive" id="TBLliST">
+                    <thead>
+                        <tr>
+                            <th>ថ្ងៃ</th>
+                            <th>លីទ្ធផល</th>
+                            <th>កូនសង</th>
+                            <th>កូនខ្ចី</th>
+                            <th>ចាស់</th>
+                            <th>ចុងក្រោយ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        @*<tr>
+                            <td>89</td>
+                            <td>:</td>
+                            <td>7 ៛ </td>
+                            <td>:</td>
+                            <td>7 ៛ </td>
+                        </tr>*@
+                    </tbody>
+                    <tfoot>
+                        <tr></tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- this row will not appear when printing -->
+            <div class="clearfix"></div>
+        </section>
+        <!-- /.content -->
+
+    </div>
+
+    @*Modal*@
+    @*End Modal*@
+    <!-- /.content-wrapper -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialFooter.cshtml");
+    <!-- Control Sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialRSidebar.cshtml");
+    <!-- /.control-sidebar -->
+
+</div>
+@*Modal*@
+<div class="modal fade" id="mPay" role="dialog">
+    <div class="modal-dialog modal-md">
+        <form>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel"></h3>
+                </div>
+                <div class="modal-body">
+
+                    <!-- content goes here -->
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group hidden">
+
+                        <label for="HAgencyID" class="control-label col-md-4"></label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="HAgencyID" name="AgencyID" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="FDate" class="control-label col-md-4">​ថ្ងៃ</label>
+                        <div class="col-md-8">
+                            <input type="text" name="PDate" class="form-control pull-right datepicker" id="PDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Amount" class="control-label col-md-4">ប្រាក់</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="PAmount" name="PAmount" />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" role="button">បិទ</button>
+                        </div>
+                        <div class="btn-group btn-delete hidden" role="group">
+                            <button type="button" id="btnClose" name="btnClose" class="btn btn-default btn-hover-red" data-dismiss="modal" role="button">បិទ</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" id="btnSaveDp" name="btnSaveDp" class="btn btn-default btn-hover-green" data-action="save" role="button">រក្សាទុក</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalL" role="dialog">
+    <div class="modal-dialog modal-md">
+        <form>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel"></h3>
+                </div>
+                <div class="modal-body">
+
+                    <!-- content goes here -->
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group hidden">
+
+                        <label for="HAgencyID" class="control-label col-md-4"></label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="HAgencyID" name="AgencyID" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="LDate" class="control-label col-md-4">​ថ្ងៃ</label>
+                        <div class="col-md-8">
+                            <input type="text" name="LDate" class="form-control pull-right datepicker" id="LDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="LAmount" class="control-label col-md-4">ប្រាក់</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="LAmount" name="LAmount" />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" role="button">បិទ</button>
+                        </div>
+                        <div class="btn-group btn-delete hidden" role="group">
+                            <button type="button" id="btnClose" name="btnClose" class="btn btn-default btn-hover-red" data-dismiss="modal" role="button">បិទ</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" id="btnSaveDL" name="btnSaveDL" class="btn btn-default btn-hover-green" data-action="save" role="button">រក្សាទុក</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts
+
+{
+    <div>
+        <script src="~/Scripts/spjs/spHelpers.js"></script>
+        <script>
+
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        //var today1 = date.getDay() + '-' + date.getMonth() + '-' + date.getYear();
+
+        var end = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+        $('#FDate').datepicker({
+            format: 'yyyy-mm-dd',
+        });
+        $('#TDate').datepicker({
+            format: 'yyyy-mm-dd',
+        });
+        $('#PDate').datepicker({
+            format: 'yyyy-mm-dd',
+        });
+
+        $(document).ready(function (event) {
+
+            var url = "/UtiHelper/_getOptionListByKeyOder";
+            var id = 3;
+            data = JSON.stringify({ id: null });
+            dpObject = $("#AgencyID");
+            fechOption(dpObject, url, null, "Agencies", "AgencyID", "AgencyName", "AgencyID", "AgencyID", "ASC", '<option value="0"> --ភ្នាក់ងារ-- </option>');
+
+            var date = new Date();
+            $('.sp-input').removeClass('spselected');
+            $("#txtNum").addClass("spselected");
+            // GET YYYY, MM AND DD FROM THE DATE OBJECT
+            var yyyy = date.getFullYear().toString();
+            var mm = (date.getMonth() + 1).toString();
+            var dd = date.getDate().toString();
+
+            // CONVERT mm AND dd INTO chars
+            var mmChars = mm.split('');
+            var ddChars = dd.split('');
+
+            // CONCAT THE STRINGS IN YYYY-MM-DD FORMAT
+            var datestring = yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+            $("#FDate").val(datestring);
+            $("#TDate").val(datestring);
+
+
+            $("#btnSaveDp").click(function (e) {
+                // e.pre
+                e.preventDefault();
+                var validate = true;
+                if (validate == false) {
+                    alert('false');
+                    return false;
+                } else {
+
+                    var error_free = true;
+                    var url = "/Manage/_doPay";
+                    //alert(url);tai
+                    if (!error_free) {
+                        //event.preventDefault();
+                    }
+                    else {
+
+                        var HORGADDID = $('#HORGADDID').val();
+                        var _PDate = $("#PDate").val();
+                        var Amount = $("#PAmount").val();
+                        //alert(_TDate);
+                        var AgencyID = $("#AgencyID").val();
+                        if (AgencyID == 0) {
+                            alert("សូមជ្រើសរើសភ្នាក់ងារ!");
+                        }
+
+                        data = {
+                            "AgencyID": "" + AgencyID + ""
+                            , "TranDate": "" + _PDate + ""
+                            , "TranAmunt": Amount
+                            , "TranType": 1
+                        }
+
+                        $.post(url, data, function (data) {
+                            if (data.Status == "OK") {
+                                //var tbrow = "";
+                                alert(data.Message);
+                                $('#mPay').modal('hide');
+                                return false;
+                            }
+
+                        });
+                    }
+                }
+
+                return false;
+
+            });
+
+            $("#btnSaveDL").click(function (e) {
+                /**/
+                e.preventDefault();
+                var validate = true;
+                if (validate == false) {
+                    alert('false');
+                    return false;
+                } else {
+
+                    var error_free = true;
+                    var url = "/Manage/_doPay";
+                    //alert(url);tai
+                    if (!error_free) {
+                        //event.preventDefault();
+                    }
+                    else {
+
+                        var HORGADDID = $('#HORGADDID').val();
+                        var _PDate = $("#LDate").val();
+                        var Amount = $("#LAmount").val();
+                        //alert(_TDate);
+                        var AgencyID = $("#AgencyID").val();
+                        if (AgencyID == 0) {
+                            alert("សូមជ្រើសរើសភ្នាក់ងារ!");
+                        }
+
+                        data = {
+                            "AgencyID": "" + AgencyID + ""
+                            , "TranDate": "" + _PDate + ""
+                            , "TranAmunt": Amount
+                            , "TranType": 2
+                        }
+
+                        $.post(url, data, function (data) {
+                            if (data.Status == "OK") {
+                                //var tbrow = "";
+                                alert(data.Message);
+                                $('#modalL').modal('hide');
+                                return false;
+                            }
+
+                        });
+                    }
+                }
+                return false;
+
+            });
+
+        });
+        function LoadList() {
+
+            $("#fdisplay").html("");
+
+
+            var validate = true;
+            if (validate == false) {
+                alert('false');
+                return;
+            } else {
+
+                var error_free = true;
+                var url = "/Manage/_LoadDoDetail";
+                //alert(url);tai
+                if (!error_free) {
+                    //event.preventDefault();
+                }
+                else {
+                    //alert('No errors: Form will be submitted');
+                    //event.preventDefault();
+
+                    var HORGADDID = $('#HORGADDID').val();
+                    var _FDate = $("#FDate").val();
+                    var _TDate = $("#TDate").val();
+                    //alert(_TDate);
+                    var CustomerID = $("#AgencyID").val();
+
+                    data = {
+                        "FromDate": ""+ _FDate+ ""
+                        , "ToDate": "" + _TDate + ""
+                        , "CustomerID": CustomerID
+                    }
+                    $("#TBLliST tbody").html("");
+                    $.post(url, data, function (data) {
+                        if (data.Status == "OK") {
+                            var tbrow="";
+                            $.each(data.Result, function (i, item) {
+                               tbrow +=' <tr>'
+                                       + '<td>' + item.PlayDate + '</td>'
+                                       + '<td>' + (item.SRAmount) + '</td>'
+                                       + '<td>' + item.Collected + '</td>'
+                                       + '<td>' + item.AgBorrow + '</td>'
+                                       + '<td>' + item.OldBanlance + '</td>'
+                                        + '<td>' + item.Banlance + '</td>'
+                                        +'</tr>';
+
+                            });
+                            $("#TBLliST tbody").append(tbrow);
+                        }
+
+                    });
+                }
+            }
+            return false;
+        }
+
+        </script>
+    </div>
+
+}

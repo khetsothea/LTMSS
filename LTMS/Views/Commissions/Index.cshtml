@@ -1,0 +1,341 @@
+﻿@model IEnumerable<LTMS.Models.Lotteries.tblCommission>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper">
+    @Html.Partial("~/Views/Shared/Partails/_PartialHeader.cshtml");
+    <!-- Left side column. contains the logo and sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialLSidebar.cshtml");
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            @*<table cellpadding="0" cellspacing="0" width="100%">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <form name="add_frm">
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tbody>
+                                            <tr valign="middle">
+                                                <td width="15"></td>
+                                                <td>លក់</td>
+                                                <td>
+                                                    <select class="select" name="time" onchange="changeTime(this);" style="height:34px">
+                                                        <option value="1">ថៃ</option>
+                                                        <option value="2">ល្ងាច</option>
+                                                        <option value="3" selected="selected">យប់</option>
+                                                        <option value="4">ខ្មែរថ្ងៃ</option>
+                                                        <option value="5">ខ្មែរយប់</option>
+                                                        <option value="6">ខ្មែរល្ងាច</option>
+
+                                                    </select>
+                                                </td>
+                                                <td>ថ្ងៃ :</td>
+                                                <td>
+                                                    <img style="vertical-align:middle" src="images/prev.png" onclick="document.add_frm.date.value = prevDay(document.add_frm.date.value); prevDateDisplay();" width="30">
+                                                </td>
+                                                <td><strong><input type="text" onchange="changerDateTime()" name="date" id="sel3" size="8" value="2016-11-25" style="font-size:15px">	  &nbsp;</strong></td>
+                                                <td><img style="vertical-align:middle" src="images/next.png" onclick="document.add_frm.date.value = nextDay(document.add_frm.date.value); nextDateDisplay();" width="30"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </td>
+                            <td height="31" colspan="3" align="center" valign="middle">
+                                <form name="frm_top">
+                                    <table>
+                                        <input type="hidden" label="0" name="client" value="1">
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="button" value="ឈប់កែ" onclick="valid_verify()" class="inputbt" style="font-size:12px"></td>
+                                                <td><input type="button" value="ចេញកន្ទុយ" onclick="print_tail()" class="inputbt" style="font-size:12px"></td>
+                                                <td>ស្លឹក</td>
+                                                <td><input type="text" name="page" value="1" id="frm_page" onchange="change_page();" class="input_top"></td>
+                                                <td>ជួរ</td>
+                                                <td><input type="text" name="col_number" value="1" id="frm_col_number" onchange="change_col();" class="input_top"></td>
+                                                <td>កន្ទុយ</td>
+                                                <td><input type="hidden" name="preak_post" value="3" id="frm_preak_post"><input type="text" name="tail" value="1" id="tail" class="input_top" onchange="change_tail();"></td>
+
+                                                <td align="right"><strong>ពេល</strong></td>
+                                                <td onmouseup="check_time(1,1);" width="80" align="center" style="display:none">
+                                                    ព្រឹក&nbsp;<input type="checkbox" id="time_1" name="time[]" value="1" onchange="check_time(1,0);">
+                                                </td>
+                                                <td>|</td>
+                                                <td onmouseup="check_time(2,1);" width="80" align="center" style="display:none">
+                                                    ល្ងាច&nbsp;<input type="checkbox" id="time_2" name="time[]" value="2" checked="checked" onchange="check_time(2,0);">
+                                                </td>
+                                                <td>|</td>
+                                                <td onmouseup="check_time(3,1);" width="80" align="center" style="display:none">
+                                                    យប់<input type="checkbox" name="time[]" id="time_3" value="3" onchange="check_time(3,0);">
+                                                </td>
+                                                <td><input title="បង្ហាញទាំងអស់" type="button" value="SHOW" onclick="display_by_client(document.frm_top.client.value)" style="font-size:12px"></td>
+                                                <td><input title="ទៅបញ្ចូលវិញ" type="button" value="ADD" onclick="add_by_client(document.frm_top.client.value)" style="font-size:12px"></td>
+                                                <td><input type="text" id="page_show" class="input_top" title="សន្លឹក" onchange="document.getElementById('frm_col_number').value=0;	document.getElementById('frm_preak_post').value=0; document.getElementById('tail').value=0;" onkeyup="page_show_press(event,this);"></td>
+                                                <td style="display:none"><input name="percent_sell" value="1" type="text" style="width:40px" onkeyup="percent_sell_pressed(event,this)" title="ភាគរយ" onchange="if(this.value>1||this.value<=0) this.value=1; " &#8203;=""></td>
+                                                <td style="display:none"><input type="checkbox" name="sang" title="For Sang" onclick="document.frm.bnum.focus();"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>*@
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <button type="button" class="btn btn-sm close pull-right" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <a href="@Url.Action("Index", "Shifts")" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-plus"></i> @LTMS.Languages.Resource.AddNew
+                        </a>
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tblShifts.ShiftDescription)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.x2)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.x3)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.status)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.deleted)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tblShifts.ShiftDescription)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.x2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.x3)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.deleted)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.CommId }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.CommId }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.CommId })
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix">
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    @*Modal*@
+    <div class="modal fade" id="mShift" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>ពេល</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center">
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-12 kShift" data-value="1" data-text="ល្ងាច">ល្ងាច</div>
+                            <div class="btn btn-default col col-xs-12 kShift" data-value="2" data-text="យប់">យប់</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-12 kShift" data-value="OK"><i class="fa fa-arrow-left"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="mPost" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>ប៉ុស្តន៍</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center">
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="A">A</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="B">B</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="C">C</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="D">D</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="H">H</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="AB">AB</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="AC">AC</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="AD">AD</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="BC">BC</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="AH">AH</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="BH">BH</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="CH">CH</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="HD">HD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="BD">BD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="CD">CD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="ABC">ABC</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="ABD">ABD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="ACD">ACD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="BCD">BCD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="ABCD">ABCD</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-12 kpost" data-value="OK"><i class="fa fa-arrow-left"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @*End Modal*@
+    <!-- /.content-wrapper -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialFooter.cshtml");
+    <!-- Control Sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialRSidebar.cshtml");
+    <!-- /.control-sidebar -->
+</div>
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            var d = new Date();
+            var strDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+
+            $("#sp-date").val(strDate);
+
+
+                $("#btn-next").click(function (event) {
+                    var _date = $("#sp-date").val();
+                    var someDate = new Date(_date);
+                    someDate.setDate(someDate.getDate() + 1); //number  of days to add, e.x. 15 days
+                    var dateFormated = someDate.toISOString().substr(0, 10);
+
+                    $("#sp-date").val(dateFormated);
+                });
+            $("#btn-before").click(function (event) {
+                var _date = $("#sp-date").val();
+                var someDate = new Date(_date);
+                someDate.setDate(someDate.getDate() - 1); //number  of days to add, e.x. 15 days
+                var dateFormated = someDate.toISOString().substr(0, 10);
+                $("#sp-date").val(dateFormated);
+            });
+
+            //$(function () {
+            //    $(".datepicker").datepicker({
+            //        showOn: "button",
+            //        dateFormat: "mm/dd/yy",
+            //        buttonImage: "/Image/calendar_2.png",
+            //        buttonImageOnly: true,
+            //        buttonText: "Select date"
+            //    });
+            //});
+            //$(".vs2").select2();
+
+            $(".key").click(function (event) {
+                var _value = $(this).data("value");
+              //  alert(_value);
+               // var olval = $('.sp-input').val() + _value;
+                $('.spselected').val($('.spselected').val() + _value);
+            });
+
+            $(".funcR").click(function (event) {
+                var _value = $(this).data("value");
+                //alert(_value);
+                if (_value == 'remove') {
+                    var olval = $('.spselected').val();
+                    var value = olval.substring(0, olval.length - 1);
+                    $('.spselected').val(value);
+                } else if (_value == 'removeall') {
+                //     var olval = $('.spselected').val();
+                //var value = olval.substring(0, olval.length - 1);
+                $('.spselected').val('');
+                }
+
+            });
+
+            //Shift
+            $(".kShift").click(function (event) {
+                var _value = $(this).data("value");
+                var _txt = $(this).data("text");
+                if (_value != "OK") {
+                    //$("#btnShift").val(_value);
+                    $('#btnShift').data('value', _value);
+                    $('#shift-text').text( _txt);
+
+                } else {
+                    $("#mShift").modal("hide");
+                }
+            });
+                // al
+        $(".kpost").click(function (event) {
+            var _value = $(this).data("value");
+            if (_value != "OK") {
+                $("#txtPost").val(_value);
+            } else {
+                $("#mPost").modal("hide");
+            }
+            // alert(_value);
+        });
+
+
+            $('.sp-input').click(function () {
+                $('.sp-input').removeClass('spselected');
+                $(this).addClass('spselected');
+            });
+
+    });
+    </script>
+}
+

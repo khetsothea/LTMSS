@@ -1,0 +1,202 @@
+﻿@model IEnumerable<LTMS.Models.Lotteries.tblResultSA>
+
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Result</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ResultDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResultTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShiftID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.A2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.B2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.C2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.D2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.H2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO6)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO7)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO8)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO9)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO10)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO11)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO12)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO13)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO14)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO15)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO16)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO17)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO18)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO19)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LO20)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResultDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResultTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShiftID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.A2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.B2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.C2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.D2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.H2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO6)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO7)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO8)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO9)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO10)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO11)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO12)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO13)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO14)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO15)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO16)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO17)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO18)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO19)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LO20)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ResultID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ResultID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ResultID })
+        </td>
+    </tr>
+}
+
+</table>

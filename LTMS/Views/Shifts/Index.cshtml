@@ -1,0 +1,324 @@
+﻿@model IEnumerable<LTMS.Models.Lotteries.tblShift>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper">
+    @Html.Partial("~/Views/Shared/Partails/_PartialHeader.cshtml");
+    <!-- Left side column. contains the logo and sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialLSidebar.cshtml");
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <button type="button" class="btn btn-sm close pull-right" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @*<a href="@Url.Action("Index", "Shifts")" class="btn btn-primary" >
+                            <i class="glyphicon glyphicon-plus"></i> @LTMS.Languages.Resource.AddNew
+                        </a>*@
+                        <table class="table table-responsive table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ShiftDescription)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ShiftDescriptionKh)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.OpenTime)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CloseTime)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ShiftDescription)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ShiftDescriptionKh)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OpenTime)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CloseTime)
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Edit","Shifts", new { id = item.ShiftId })" ><i class="glyphicon glyphicon-pencil"></i></a>
+                                            @*<a href="@Url.Action("Details","Shifts", new { id = item.ShiftId }))"><i class="glyphicon glyphicon-eye-open"></i></a> |
+                                            <a href="@Url.Action("Delete","Shifts", new { id = item.ShiftId }))"><i class="glyphicon glyphicon-remove"></i></a> |*@
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix">
+
+                    </div>
+                </div>
+
+               </div>
+                <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    @*Modal*@
+    <div class="modal fade" id="mShift" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>ពេល</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center">
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-12 kShift" data-value="1" data-text="ល្ងាច">ល្ងាច</div>
+                            <div class="btn btn-default col col-xs-12 kShift" data-value="2" data-text="យប់">យប់</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-12 kShift" data-value="OK"><i class="fa fa-arrow-left"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="mPost" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>ប៉ុស្តន៍</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center">
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="A">A</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="B">B</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="C">C</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="D">D</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="H">H</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="AB">AB</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="AC">AC</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="AD">AD</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="BC">BC</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="AH">AH</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="BH">BH</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="CH">CH</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="HD">HD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="BD">BD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="CD">CD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="ABC">ABC</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="ABD">ABD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="ACD">ACD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="BCD">BCD</div>
+                            <div class="btn btn-default col col-xs-3 kpost" data-value="ABCD">ABCD</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-12 kpost" data-value="OK"><i class="fa fa-arrow-left"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @*End Modal*@
+    <!-- /.content-wrapper -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialFooter.cshtml");
+    <!-- Control Sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialRSidebar.cshtml");
+    <!-- /.control-sidebar -->
+</div>
+@section Scripts
+{
+    <script>
+        function dRemove(event) {
+            var id = $(this).closest(".LDisplay");
+           alert();
+            id.remove();
+        }
+
+        $(document).ready(function () {
+            $(function () {
+                $(".dRemove").on('click', function (event) {
+                    var id = $(this).closest(".LDisplay");
+                    alert();
+                    id.remove();
+
+                });
+            });
+            var d = new Date();
+            var strDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+
+            $("#sp-date").val(strDate);
+
+
+                $("#btn-next").click(function (event) {
+                    var _date = $("#sp-date").val();
+                    var someDate = new Date(_date);
+                    someDate.setDate(someDate.getDate() + 1); //number  of days to add, e.x. 15 days
+                    var dateFormated = someDate.toISOString().substr(0, 10);
+
+                    $("#sp-date").val(dateFormated);
+                });
+            $("#btn-before").click(function (event) {
+                var _date = $("#sp-date").val();
+                var someDate = new Date(_date);
+                someDate.setDate(someDate.getDate() - 1); //number  of days to add, e.x. 15 days
+                var dateFormated = someDate.toISOString().substr(0, 10);
+                $("#sp-date").val(dateFormated);
+            });
+
+
+            $("#btnSave").click(function (event) {
+                event.preventDefault();
+                ///alert("btnPlay");
+
+                var validate = true;
+
+                if (validate == false) {
+                    alert('false');
+                    return;
+
+                } else {
+
+                    var error_free = true;
+                    var url = "/Manage/_AddAgency";
+                    //alert(url);
+                    if (!error_free) {
+                        event.preventDefault();
+                    }
+                    else {
+                        //alert('No errors: Form will be submitted');
+                        event.preventDefault();
+                        var AgencyID = $('#AgencyID').val();
+                        AgencyName = $("#AgencyName").val();
+                        AgencyNickname = $('#AgencyNickname').val();
+                        PhoneNumber = $('#PhoneNumber').val();
+                        GenderID = $('#GenderID').val();
+                        Address = $('#Address').val();
+                        StatusID = $("#Status").val();
+
+                        data = {
+                            "AgencyID": AgencyID
+                            , "AgencyName": AgencyName
+                            , "AgencyNickname": AgencyNickname
+                            , "PhoneNumber": PhoneNumber
+                            , "GenderID": GenderID
+                            , "Address": Address
+                            , "StatusID": StatusID
+                        }
+
+                        $.post(url, data, function (data) {
+                            //  alert(data);
+                            if (data.Result == "OK") {
+                                //alert(data.Result);
+                                $("#mShift").modal("hide");
+                            } else {
+                                alert(data.Result);
+                                //$('#dialogOrgMember #dialogContent').scrollTop(0);
+                            }
+
+                        });
+
+
+                    }
+                }
+
+            });
+
+
+            $(".key").click(function (event) {
+                var _value = $(this).data("value");
+              //  alert(_value);
+               // var olval = $('.sp-input').val() + _value;
+                $('.spselected').val($('.spselected').val() + _value);
+            });
+
+            $(".funcR").click(function (event) {
+                var _value = $(this).data("value");
+                //alert(_value);
+                if (_value == 'remove') {
+                    var olval = $('.spselected').val();
+                    var value = olval.substring(0, olval.length - 1);
+                    $('.spselected').val(value);
+                } else if (_value == 'removeall') {
+                //     var olval = $('.spselected').val();
+                //var value = olval.substring(0, olval.length - 1);
+                $('.spselected').val('');
+                }
+
+            });
+
+            //Shift
+            $(".kShift").click(function (event) {
+                var _value = $(this).data("value");
+                var _txt = $(this).data("text");
+                if (_value != "OK") {
+                    //$("#btnShift").val(_value);
+                    $('#btnShift').data('value', _value);
+                    $('#shift-text').text( _txt);
+
+                } else {
+                    $("#mShift").modal("hide");
+                }
+            });
+                // al
+        $(".kpost").click(function (event) {
+            var _value = $(this).data("value");
+            if (_value != "OK") {
+                $("#txtPost").val(_value);
+            } else {
+                $("#mPost").modal("hide");
+            }
+            // alert(_value);
+        });
+
+            $('.sp-input').click(function () {
+                $('.sp-input').removeClass('spselected');
+                $(this).addClass('spselected');
+            });
+
+    });
+    </script>
+}

@@ -1,0 +1,776 @@
+﻿@model IEnumerable<LTMS.Models.Lotteries.tblResultSA>
+@{ ViewBag.Title = "Index"; Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="wrapper">
+    @Html.Partial("~/Views/Shared/Partails/_PartialHeader.cshtml");
+    <!-- Left side column. contains the logo and sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialLSidebar.cshtml");
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="form-group">
+                <label>Date:</label>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right datepicker" id="datepicker">
+                </div>
+                <!-- /.input group -->
+            </div>
+        </section>
+        <!-- Main content -->
+        <section class="box col-xs-6" id="box-afternoon">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <div class="pull-left">
+                        <p></p>
+                    </div>
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-sm close pull-right" data-widget="collapse" aria-label="Close">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="container-fluid text-center dataTables_scrollBody">
+                        <div class="row">
+
+                            <table class="table table-bordered table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>ពេល</th>
+                                        <th>គុណទឹក២លេខ</th>
+                                        <th>គុណទឹក៣លេខ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>A</td>
+                                        <td><input type="number" id="A2" name="A2" class="form-control numeric sp-input torder-1" data-rule-required="true" data-taborder="1" data-msg-required="Please enter something here!"/>
+                                        <td><input type="number" id="LO1" name="LO1" class="form-control  ﻿numeric sp-input torder-2"  data-taborder="2" minlength="2" maxlength="3"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="15" valign="middle" style="vertical-align: middle;">LO(20-25)</td>
+                                        <td></td>
+                                        <td><input type="number" id="LO2" name="LO2" class="form-control  ﻿numeric sp-input torder-3"  data-taborder="3" /></td>
+                                    </tr>
+                                    <tr><td></td><td><input type="text" id="LO3" name="LO3" class="form-control numeric sp-input torder-4"  data-taborder="4"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO4" name="LO4" class="form-control numeric sp-input torder-5"  data-taborder="5"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO5" name="LO5" class="form-control numeric sp-input torder-6"  data-taborder="6"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO6" name="LO6" class="form-control numeric sp-input torder-7"  data-taborder="7"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO7" name="LO7" class="form-control numeric sp-input torder-8"  data-taborder="8"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO8" name="LO8" class="form-control numeric sp-input torder-9"  data-taborder="9"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO9" name="LO9" class="form-control numeric sp-input torder-10"  data-taborder="10"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO10" name="LO10" class="form-control numeric sp-input torder-11"  data-taborder="11"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO11" name="LO11" class="form-control numeric sp-input torder-12"  data-taborder="12"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO12" name="LO12" class="form-control numeric sp-input torder-13"  data-taborder="3"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO13" name="LO13" class="form-control numeric sp-input torder-14"  data-taborder="4"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO14" name="LO14" class="form-control numeric sp-input torder-15"  data-taborder="15"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO15" name="LO15" class="form-control numeric sp-input torder-16"  data-taborder="16"/></td></tr>
+                                    <tr><td></td><td><input type="text" id="LO16" name="LO16" class="form-control numeric sp-input torder-17"  data-taborder="17"/></td></tr>
+                                   <tr>
+                                        <td>B</td>
+                                        <td><input type="number" id="B2" name="B2" class="form-control numeric sp-input torder-18"  data-taborder="18"/></td>
+                                        <td><input type="number" id="LO17" name="LO17" class="form-control  ﻿numeric sp-input torder-19"  data-taborder="19"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>C</td>
+                                        <td><input type="text" id="C2" name="C2" class="form-control  ﻿numeric sp-input torder-20"  data-taborder="20"/></td>
+                                        <td><input type="text" id="LO18" name="LO18" class="form-control  ﻿numeric sp-input torder-21" data-taborder="21" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D</td>
+                                        <td><input type="text" id="D2" name="D2" class="form-control  ﻿numeric sp-input torder-22" data-taborder="22" /></td>
+                                        <td><input type="text" id="LO19" name="LO19" class="form-control  ﻿numeric sp-input torder-23" data-taborder="23" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>H</td>
+                                        <td><input type="text" id="H2" name="H2" class="form-control  ﻿numeric sp-input torder-24" data-taborder="24" /></td>
+                                        <td><input type="text" id="LO20" name="LO20" class="form-control  ﻿numeric sp-input torder-25" data-taborder="25" /></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+                <div class="box-footer with-border">
+                    <div class="pull-right">
+                        <button type="button" id="btnSaveRAInfo" data-value="1" data-target="#btnSaveRAInfo"
+                                class="btn btn-sm">
+                            <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>រក្សាទុក</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+        <!-- Main content -->
+        <section class="box col-xs-6" id="box-afternoon">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <div class="pull-left">
+                        <p></p>
+                    </div>
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-sm close pull-right" data-widget="collapse" aria-label="Close">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="container-fluid text-center dataTables_scrollBody">
+                        <div class="row">
+
+                            <table class="table table-bordered table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>ពេល</th>
+                                        <th>គុណទឹក២លេខ</th>
+                                        <th>គុណទឹក៣លេខ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>A1</td>
+                                        <td><input type="number" id="A1X2" name="A1X2" class="form-control numeric sp-input torder-26" data-taborder="26" data-rule-required="true" data-msg-required="Please enter something here!" />
+                                        <td><input type="number" id="XLO1" name="XLO1" class="form-control  ﻿numeric sp-input torder-27"  data-taborder="27"minlength="2" maxlength="3" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>A2</td>
+                                        <td><input type="number" id="A2X2" name="A2X2" class="form-control numeric sp-input torder-28"  data-taborder="28" data-rule-required="true" data-msg-required="Please enter something here!" />
+                                        <td><input type="number" id="XLO2" name="XLO2" class="form-control  ﻿numeric sp-input torder-29" data-taborder="29" minlength="2" maxlength="3" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>A3</td>
+                                        <td><input type="number" id="A3X2" name="A3X2" class="form-control numeric sp-input torder-30" data-taborder="30" data-rule-required="true" data-msg-required="Please enter something here!" />
+                                        <td><input type="number" id="XLO3" name="XLO3" class="form-control  ﻿numeric sp-input torder-31" data-taborder="31" minlength="2" maxlength="3" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>A4</td>
+                                        <td><input type="number" id="A4X2" name="A4X2" class="form-control numeric sp-input torder-32" data-taborder="32" data-rule-required="true" data-msg-required="Please enter something here!" />
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B</td>
+                                        <td><input type="number" id="BX2" name="BX2" class="form-control numeric sp-input torder-33" data-taborder="33" data-rule-required="true" data-msg-required="Please enter something here!" />
+                                        <td><input type="number" id="XLO4" name="XLO4" class="form-control  ﻿numeric sp-input torder-34" data-taborder="34" minlength="2" maxlength="3" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>C</td>
+                                        <td><input type="number" id="CX2" name="CX2" class="form-control numeric sp-input torder-35" data-taborder="35" data-rule-required="true" data-msg-required="Please enter something here!" />
+                                        <td><input type="number" id="XLO5" name="XLO5" class="form-control  ﻿numeric sp-input torder-36" data-taborder="36" minlength="2" maxlength="3" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D</td>
+                                        <td><input type="number" id="DX2" name="A1X2" class="form-control numeric sp-input torder-37" data-taborder="37" data-rule-required="true" data-msg-required="Please enter something here!" />
+                                        <td><input type="number" id="XLO6" name="XLO6" class="form-control  ﻿numeric sp-input torder-38" data-taborder="38" minlength="2" maxlength="3" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td rowspan="20" valign="middle" style="vertical-align: middle;">LO(25-30)</td>
+                                        <td></td>
+                                        <td><input type="number" id="XLO7" name="XLO7" class="form-control numeric sp-input torder-39" data-taborder="39" /></td>
+                                    </tr>
+                                    @*<tr><td></td><td><input type="number" id="XLO7" name="XLO7" class="form-control numeric" /></td></tr>*@
+                                    <tr><td></td><td><input type="text" id="XLO8" name="XLO8" class="form-control numeric sp-input torder-40" data-taborder="40" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO9" name="XLO9" class="form-control numeric sp-input torder-41" data-taborder="41" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO10" name="XLO10" class="form-control numeric sp-input torder-42"  data-taborder="42" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO11" name="XLO11" class="form-control numeric sp-input torder-43" data-taborder="43" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO12" name="XLO12" class="form-control numeric sp-input torder-44" data-taborder="44" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO13" name="XLO13" class="form-control numeric sp-input torder-45" data-taborder="45" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO14" name="XLO14" class="form-control numeric sp-input torder-46" data-taborder="46" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO15" name="XLO15" class="form-control numeric sp-input torder-47" data-taborder="47" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO16" name="XLO16" class="form-control numeric sp-input torder-48" data-taborder="48" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO17" name="XLO17" class="form-control numeric sp-input torder-49" data-taborder="49" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO18" name="XLO18" class="form-control numeric sp-input torder-50" data-taborder="50" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO19" name="XLO19" class="form-control numeric sp-input torder-51" data-taborder="51" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO20" name="XLO20" class="form-control numeric sp-input torder-52" data-taborder="52" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO21" name="XLO21" class="form-control numeric sp-input torder-53" data-taborder="53" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO22" name="XLO22" class="form-control numeric sp-input torder-54" data-taborder="54" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO23" name="XLO23" class="form-control numeric sp-input torder-55" data-taborder="55" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO24" name="XLO24" class="form-control numeric sp-input torder-56" data-taborder="56" /></td></tr>
+                                    <tr><td></td><td><input type="text" id="XLO25" name="XLO25" class="form-control numeric sp-input torder-57" data-taborder="57" /></td></tr>
+
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+                <div class="box-footer with-border">
+                    <div class="pull-right">
+                        <button type="button" id="btnSaveREInfo" data-value="1" data-target="#btnSaveREInfo"
+                                class="btn btn-sm">
+                            <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>រក្សាទុក</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    @*Modal*@
+
+    @*End Modal*@
+    <!-- /.content-wrapper -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialFooter.cshtml");
+    <!-- Control Sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialRSidebar.cshtml");
+    <!-- /.control-sidebar -->
+</div>
+<div class="modal fade" id="mKeyBoard" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2></h2>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="btn-block">
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 key" data-value="7" style="min-height:80px;">7</button>
+                            </div>
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 key" data-value="8" style="min-height:80px;">8</button>
+                            </div>
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 key" data-value="9" style="min-height:80px;">9</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="btn-block">
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 key" data-value="4" style="min-height:80px;">4</button>
+                            </div>
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 key" data-value="5" style="min-height:80px;">5</button>
+                            </div>
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 key" data-value="6" style="min-height:80px;">6</button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="btn-block">
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 key" data-value="1" style="min-height:80px;">1</button>
+                            </div>
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 key" data-value="2" style="min-height:80px;">2</button>
+                            </div>
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 key" data-value="3" style="min-height:80px;">3</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="btn-block">
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 key" data-value="0" style="min-height:80px;">0</button>
+                            </div>
+                            <div class=" col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 sp-btn funcR" data-value="remove" style="min-height:80px;">x</button>
+                            </div>
+                            <div class="col-xs-4" style="padding:3px;">
+                                <button class="btn col-xs-12 sp-btn funcR" data-value="Enter" style="min-height:80px;">&lt;-</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts
+{
+    <div>
+        <script src="~/Scripts/spjs/spHelpers.js"></script>
+        <script>
+         var GPROID = '@ViewBag.ID';
+        function dRemove(event) {
+            var id = event.closest('.LDisplay'); //("..LDisplay");
+            // alert();
+            id.remove();
+        }
+
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        //var today1 = date.getDay() + '-' + date.getMonth() + '-' + date.getYear();
+
+        var end = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+        $('#datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+        });
+
+        $(document).ready(function (event) {
+            //$(".numeric").inputmask("99-9999999");
+            var d = new Date();
+            var strDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+            var today1 = d.getFullYear() + "-" + leftPad(d.getMonth() + 1 , 2) + "-" + leftPad(d.getDate(), 2);
+
+            $('#datepicker').val(today1);
+
+            fLoad(1);
+            fLoad(2);
+
+            $("#btnSaveRAInfo").click(function (event) {
+                event.preventDefault();
+                //alert($('#AX2').val());
+                var validate = true;
+              var  A2 = $('#A2').val();
+                B2 = $('#B2').val();
+                C2 = $('#C2').val();
+                D2 = $('#D2').val();
+                H2 = $('#H2').val();
+
+                LO1 = $('#LO1').val();
+                LO2 = $('#LO2').val();
+                LO3 = $('#LO3').val();
+                LO4 = $('#LO4').val();
+                LO5 = $('#LO5').val();
+                LO6 = $('#LO6').val();
+                LO7 = $('#LO7').val();
+                LO8 = $('#LO8').val();
+                LO9 = $('#LO9').val();
+                LO10 = $('#LO10').val();
+                LO11 = $('#LO11').val();
+                LO12 = $('#LO12').val();
+                LO13 = $('#LO13').val();
+                LO14 = $('#LO14').val();
+                LO15 = $('#LO15').val();
+                LO16 = $('#LO16').val();
+                LO17 = $('#LO17').val();
+                LO18 = $('#LO18').val();
+                LO19 = $('#LO19').val();
+                LO20 = $('#LO20').val();
+                if (A2 == '') { alert('Please all check you all field cannot empty!..'); $('#A2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#A2').focus(); return; }
+                if (B2 == '') { alert('Please all check you all field cannot empty!..'); $('#B2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#B2').focus(); return; }
+                if (C2 == '') { alert('Please all check you all field cannot empty!..'); $('#C2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#C2').focus(); return; }
+                if (D2 == '') { alert('Please all check you all field cannot empty!..'); $('#D2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#D2').focus(); return; }
+                if (H2 == '') { alert('Please all check you all field cannot empty!..'); $('#H2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#H2').focus(); return; }
+                if (LO1 == '') { alert('Please all check you all field cannot empty!..'); $('#LO1').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO1').focus(); return; }
+                if (LO2 == '') { alert('Please all check you all field cannot empty!..'); $('#LO2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO2').focus(); return; }
+                if (LO3 == '') { alert('Please all check you all field cannot empty!..'); $('#LO3').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO3').focus(); return; }
+                if (LO4 == '') { alert('Please all check you all field cannot empty!..'); $('#LO4').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO4').focus(); return; }
+                if (LO5 == '') { alert('Please all check you all field cannot empty!..'); $('#LO5').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO5').focus(); return; }
+                if (LO6 == '') { alert('Please all check you all field cannot empty!..'); $('#LO6').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO6').focus(); return; }
+                if (LO7 == '') { alert('Please all check you all field cannot empty!..'); $('#LO7').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO7').focus(); return; }
+                if (LO8 == '') { alert('Please all check you all field cannot empty!..'); $('#LO8').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO8').focus(); return; }
+                if (LO9 == '') { alert('Please all check you all field cannot empty!..'); $('#LO9').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO9').focus(); return; }
+                if (LO10 == '') { alert('Please all check you all field cannot empty!..'); $('#LO10').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO10').focus(); return; }
+                if (LO11 == '') { alert('Please all check you all field cannot empty!..'); $('#LO11').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO11').focus(); return; }
+                if (LO12 == '') { alert('Please all check you all field cannot empty!..'); $('#LO12').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO12').focus(); return; }
+                if (LO13 == '') { alert('Please all check you all field cannot empty!..'); $('#LO13').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO13').focus(); return; }
+                if (LO14 == '') { alert('Please all check you all field cannot empty!..'); $('#LO14').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO14').focus(); return; }
+                if (LO15 == '') { alert('Please all check you all field cannot empty!..'); $('#LO15').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO15').focus(); return; }
+                if (LO16 == '') { alert('Please all check you all field cannot empty!..'); $('#LO16').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO16').focus(); return; }
+                if (LO17 == '') { alert('Please all check you all field cannot empty!..'); $('#LO17').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO17').focus(); return; }
+                if (LO18 == '') { alert('Please all check you all field cannot empty!..'); $('#LO18').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO18').focus(); return; }
+                if (LO19 == '') { alert('Please all check you all field cannot empty!..'); $('#LO19').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO19').focus(); return; }
+                if (LO20 == '') { alert('Please all check you all field cannot empty!..'); $('#LO20').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#LO20').focus(); return; }
+
+                validate = true;
+                if (validate == false) {
+                    alert('false');
+                    return;
+
+                } else {
+
+                    var error_free = true;
+                    var url = "/Manage/_SaveResultRA";
+                    //alert(url);
+                    if (!error_free) {
+                        event.preventDefault();
+                    }
+                    else {
+                        //alert('No errors: Form will be submitted');
+                        event.preventDefault();
+
+
+                        data = {
+                            "A2": A2
+                            , "B2": B2
+                            , "C2": C2
+                            , "D2": D2
+                            , "H2": H2
+                            , "LO1": LO1
+                            , "LO2": LO2
+                            , "LO3": LO3
+                            , "LO4": LO4
+                            , "LO5": LO5
+                            , "LO6": LO6
+                            , "LO7": LO7
+                            , "LO8": LO8
+                            , "LO9": LO9
+                            , "LO10": LO10
+                            , "LO11": LO11
+                            , "LO12": LO12
+                            , "LO13": LO13
+                            , "LO14": LO14
+                            , "LO15": LO15
+                            , "LO16": LO16
+                            , "LO17": LO17
+                            , "LO18": LO18
+                            , "LO19": LO19
+                            , "LO20": LO20
+                        }
+                       // alert(data);
+                        $.post(url, data, function (data) {
+                              //alert(data);
+                            if (data.Result == "OK") {
+                                alert(data.Result);
+                            } else {
+                                alert(data.Result);
+                                //$('#dialogOrgMember #dialogContent').scrollTop(0);
+                            }
+
+                        });
+
+
+                    }
+                }
+
+            });
+
+            $("#btnSaveREInfo").click(function (event) {
+                event.preventDefault();
+                //alert($('#AX2').val());
+                var validate = true;
+                A1X2 = $('#A1X2').val();
+                A2X2 = $('#A2X2').val();
+                A3X2 = $('#A3X2').val();
+                A4X2 = $('#A4X2').val();
+                BX2 = $('#BX2').val();
+                CX2 = $('#CX2').val();
+                DX2 = $('#DX2').val();
+                LO1 = $('#XLO1').val();
+                LO2 = $('#XLO2').val();
+                LO3 = $('#XLO3').val();
+                LO4 = $('#XLO4').val();
+                LO5 = $('#XLO5').val();
+                LO6 = $('#XLO6').val();
+                LO7 = $('#XLO7').val();
+                LO8 = $('#XLO8').val();
+                LO9 = $('#XLO9').val();
+                LO10 = $('#XLO10').val();
+                LO11 = $('#XLO11').val();
+                LO12 = $('#XLO12').val();
+                LO13 = $('#XLO13').val();
+                LO14 = $('#XLO14').val();
+                LO15 = $('#XLO15').val();
+                LO16 = $('#XLO16').val();
+                LO17 = $('#XLO17').val();
+                LO18 = $('#XLO18').val();
+                LO19 = $('#XLO19').val();
+                LO20 = $('#XLO20').val();
+                LO21 = $('#XLO21').val();
+                LO22 = $('#XLO22').val();
+                LO23 = $('#XLO23').val();
+                LO24 = $('#XLO24').val();
+                LO25 = $('#XLO25').val();
+
+                if (A1X2 == '') { alert('Please all check you all field cannot empty!..'); $('#A1X2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#A1X2').focus(); return; }
+                if (A2X2 == '') { alert('Please all check you all field cannot empty!..'); $('#A2X2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#A2X2').focus(); return; }
+                if (A3X2 == '') { alert('Please all check you all field cannot empty!..'); $('#A3X2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#A3X2').focus(); return; }
+                if (A4X2 == '') { alert('Please all check you all field cannot empty!..'); $('#A4X2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#A4X2').focus(); return; }
+                if (BX2 == '') { alert('Please all check you all field cannot empty!..'); $('#BX2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#BX2').focus(); return; }
+                if (CX2 == '') { alert('Please all check you all field cannot empty!..'); $('#CX2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#CX2').focus(); return; }
+                if (DX2 == '') { alert('Please all check you all field cannot empty!..'); $('#DX2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#DX2').focus(); return; }
+                if (LO1 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO1').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO1').focus(); return; }
+                if (LO2 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO2').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO2').focus(); return; }
+                if (LO3 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO3').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO3').focus(); return; }
+                if (LO4 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO4').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO4').focus(); return; }
+                if (LO5 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO5').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO5').focus(); return; }
+                if (LO6 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO6').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO6').focus(); return; }
+                if (LO7 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO7').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO7').focus(); return; }
+                if (LO8 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO8').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO8').focus(); return; }
+                if (LO9 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO9').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO9').focus(); return; }
+                if (LO10 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO10').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO10').focus(); return; }
+                if (LO11 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO11').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO11').focus(); return; }
+                if (LO12 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO12').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO12').focus(); return; }
+                if (LO13 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO13').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO13').focus(); return; }
+                if (LO14 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO14').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO14').focus(); return; }
+                if (LO15 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO15').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO15').focus(); return; }
+                if (LO16 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO16').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO16').focus(); return; }
+                if (LO17 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO17').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO17').focus(); return; }
+                if (LO18 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO18').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO18').focus(); return; }
+                if (LO19 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO19').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO19').focus(); return; }
+                if (LO20 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO20').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO20').focus(); return; }
+                if (LO21 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO21').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO21').focus(); return; }
+                if (LO22 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO22').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO22').focus(); return; }
+                if (LO23 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO23').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO23').focus(); return; }
+                if (LO24 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO24').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO24').focus(); return; }
+                if (LO25 == '') { alert('Please all check you all field cannot empty!..'); $('#XLO25').addClass('focusedInput'); $('.focusedInput').removeClass('focusedInput'); $('#XLO25').focus(); return; }
+                if (validate == false) {
+                    alert('false');
+                    return;
+
+                } else {
+
+                    var error_free = true;
+                    var url = "/Manage/_SaveResultRE";
+                    //alert(url);
+                    if (!error_free) {
+                        event.preventDefault();
+                    }
+                    else {
+                        //alert('No errors: Form will be submitted');
+                        event.preventDefault();
+
+                        data = {
+                            "A1X2":A1X2
+                            ,"A2X2":A2X2
+                            ,"A3X2":A3X2
+                            ,"A4X2":A4X2
+                            ,"BX2":BX2
+                            ,"CX2":CX2
+                            ,"DX2":DX2
+                            ,"LO1":LO1
+                            ,"LO2":LO2
+                            ,"LO3":LO3
+                            ,"LO4":LO4
+                            ,"LO5":LO5
+                            ,"LO6":LO6
+                            ,"LO7":LO7
+                            ,"LO8":LO8
+                            ,"LO9":LO9
+                            ,"LO10":LO10
+                            ,"LO11":LO11
+                            ,"LO12":LO12
+                            ,"LO13":LO13
+                            ,"LO14":LO14
+                            ,"LO15":LO15
+                            ,"LO16":LO16
+                            ,"LO17":LO17
+                            ,"LO18":LO18
+                            ,"LO19":LO19
+                            ,"LO20":LO20
+                            ,"LO21":LO21
+                            ,"LO22":LO22
+                            ,"LO23":LO23
+                            ,"LO24":LO24
+                            ,"LO25":LO25
+                        }
+                        // alert(data);
+                        $.post(url, data, function (data) {
+                            //alert(data);
+                            if (data.Result == "OK") {
+                                alert(data.Result);
+                                fLoad(1);
+                            } else {
+                                alert(data.Result);
+                                //$('#dialogOrgMember #dialogContent').scrollTop(0);
+                            }
+
+                        });
+
+
+                    }
+                }
+
+            });
+
+            $(".form-control").click(function (event) {
+                $("#mKeyBoard").modal("show");
+            });
+            $(".key").click(function (event) {
+                event.preventDefault();
+                var _value = $(this).data("value");
+                //alert(_value);
+                // var olval = $('.sp-input').val() + _value;
+                //_value = valitValueMaxNum(_value,1,999)
+                $('.spselected').val($('.spselected').val() + _value);
+
+                var spvalue = TryParseInt($('.spselected').val(), 00);
+
+                if (spvalue > 999) {
+                    $('.spselected').val("");
+                }
+                var _id = $('.spselected').attr("id");
+
+                //alert($('.spselected').attr("id"));
+                // $('.spselected').val($('.spselected').val() + _value);
+                if (_id == "txtNum") {
+                    $("#txtNum").change();
+                }
+
+                var _id = $('.spselected').attr('id');
+                var _ctab = $('.spselected').data("taborder");
+
+                if (_id == 'sp-session') {
+                    $("#sp-session").change();
+                    loanPlay();
+                }
+
+            });
+
+            $('.sp-input').click(function () {
+                $('.sp-input').removeClass('spselected');
+                $(this).addClass('spselected');
+            });
+
+            $(".funcR").click(function (event) {
+                event.preventDefault();
+                var _value = $(this).data("value");
+                //alert(_value);
+
+
+                if (_value == 'remove') {
+
+                    var olval = $('.spselected').val();
+
+                    return false;
+
+                } else if (_value == 'Enter') {
+
+                    var _urrentTab = $('.spselected').data("taborder");
+                   // alert(_urrentTab);
+                    var _NextTab = _urrentTab + 1;
+
+                    if (_NextTab > 57) {
+                        _NextTab = 1;
+                    }
+                    var _NextTabClass = '.torder-' + _NextTab;
+                   // alert(_NextTabClass);
+
+                    $('.sp-input').removeClass('spselected');
+                    //alert($(_NextTabClass).val());
+
+
+                    $(_NextTabClass).addClass("spselected");
+                    return false;
+                }
+            });
+        });
+
+        function fLoad(Shift) {
+            if (Shift != null && Shift != 1) {
+                var url = "/Manage/_LoadResult";
+                var _data = {
+                    "Shift": 2,
+                    "RDate": $('#datepicker').val()
+                }
+                // alert(_data.PROID);
+                $.post(url, _data, function (data) {
+                    if (data.Status == "OK") {
+                        //alert(data.Result);
+                        $.each(data.Result, function (index, itemData) {
+                            // alert(data.Records);
+                            $("#ResultID").val(itemData.ResultID);
+                            $("#ResultDate").val(itemData.ResultDate);
+                            $("#ResultTime").val(itemData.ResultTime);
+                            $("#ShiftID").val(itemData.ShiftID);
+                            $("#A1X2").val(itemData.A1X2);
+                            $("#A2X2").val(itemData.A2X2);
+                            $("#A3X2").val(itemData.A3X2);
+                            $("#A4X2").val(itemData.A4X2);
+                            $("#BX2").val(itemData.BX2);
+                            $("#CX2").val(itemData.CX2);
+                            $("#DX2").val(itemData.DX2);
+                            $("#XLO1").val(itemData.LO1);
+                            $("#XLO2").val(itemData.LO2);
+                            $("#XLO3").val(itemData.LO3);
+                            $("#XLO4").val(itemData.LO4);
+                            $("#XLO5").val(itemData.LO5);
+                            $("#XLO6").val(itemData.LO6);
+                            $("#XLO7").val(itemData.LO7);
+                            // alert(itemData.LO7);
+                            $("#XLO8").val(itemData.LO8);
+                            $("#XLO9").val(itemData.LO9);
+                            $("#XLO10").val(itemData.LO10);
+                            $("#XLO11").val(itemData.LO11);
+                            $("#XLO12").val(itemData.LO12);
+                            $("#XLO13").val(itemData.LO13);
+                            $("#XLO14").val(itemData.LO14);
+                            $("#XLO15").val(itemData.LO15);
+                            $("#XLO16").val(itemData.LO16);
+                            $("#XLO17").val(itemData.LO17);
+                            $("#XLO18").val(itemData.LO18);
+                            $("#XLO19").val(itemData.LO19);
+                            $("#XLO20").val(itemData.LO20);
+                            $("#XLO21").val(itemData.LO21);
+                            $("#XLO22").val(itemData.LO22);
+                            $("#XLO23").val(itemData.LO23);
+                            $("#XLO24").val(itemData.LO24);
+                            $("#XLO25").val(itemData.LO25);
+                        });
+                    } else {
+                        alert(data.Message);
+                    }
+                });
+            } else {
+                var url = "/Manage/_LoadResult";
+                var _data = {
+                    "Shift": Shift,
+                    "RDate": $('#datepicker').val()
+
+                }
+                // alert(_data.PROID);
+                $.post(url, _data, function (data) {
+                    if (data.Status == "OK") {
+                        //alert(data.Result);
+                        $.each(data.Result, function (index, itemData) {
+                            $("#ResultID").val(itemData.ResultID);
+                            $("#ResultDate").val(itemData.ResultDate);
+                            $("#ResultTime").val(itemData.ResultTime);
+                            $("#ShiftID").val(itemData.ShiftID);
+                            $("#A2").val(itemData.A2);
+                            $("#B2").val(itemData.B2);
+                            $("#C2").val(itemData.C2);
+                            $("#D2").val(itemData.D2);
+                            $("#H2").val(itemData.H2);
+                            $("#LO1").val(itemData.LO1);
+                            $("#LO2").val(itemData.LO2);
+                            $("#LO3").val(itemData.LO3);
+                            $("#LO4").val(itemData.LO4);
+                            $("#LO5").val(itemData.LO5);
+                            $("#LO6").val(itemData.LO6);
+                            $("#LO7").val(itemData.LO7);
+                            $("#LO8").val(itemData.LO8);
+                            $("#LO9").val(itemData.LO9);
+                            $("#LO10").val(itemData.LO10);
+                            $("#LO11").val(itemData.LO11);
+                            $("#LO12").val(itemData.LO12);
+                            $("#LO13").val(itemData.LO13);
+                            $("#LO14").val(itemData.LO14);
+                            $("#LO15").val(itemData.LO15);
+                            $("#LO16").val(itemData.LO16);
+                            $("#LO17").val(itemData.LO17);
+                            $("#LO18").val(itemData.LO18);
+                            $("#LO19").val(itemData.LO19);
+                            $("#LO20").val(itemData.LO20);
+                        });
+                    } else {
+                        alert(data.Message);
+                    }
+                });
+            }
+        }
+        </script>
+    </div>
+
+}

@@ -1,0 +1,63 @@
+﻿<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="~/Content/imgs/avatar04.png" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>Lottery</p>
+                <a href="#"><i class="fa fa-circle text-success"></i></a>
+            </div>
+        </div>
+        <!-- search form -->
+        @*<form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>*@
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">@LTMS.Languages.Resource.MAINNAVIGATION</li>
+            @*<li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                </ul>
+            </li>*@
+            <li><a href="/Front/Clients"><i class="fa fa-book"></i> <span>ចាក់</span></a></li>
+            <li><a href="/Manage/Agency"><i class="fa fa-book"></i> <span>ភ្នាក់ងារ</span></a></li>
+            <li><a href="/Manage/DocDetail"><i class="fa fa-book"></i> <span>ក្បាលបញ្ជី</span></a></li>
+            <li><a href="/Manage/ATranList"><i class="fa fa-book"></i> <span>ស៊ីសង</span></a></li>
+            <li><a href="/Manage/Result"><i class="fa fa-book"></i> <span>ចេញលេខ</span></a></li>
+            <li><a href="/Manage/MaxPlayNum"><i class="fa fa-book"></i> <span>លេខចាក់ច្រើនជាងគេ</span></a></li>
+            <li><a href="/Manage/WinNumber"><i class="fa fa-book"></i> <span>លេខឈ្នះ</span></a></li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>ការកំណត់</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                   @* <li><a href="/Manage/Posts"><i class="fa fa-book"></i> <span>ប៉ុស្ព៍</span></a></li>*@
+                    <li><a href="/Shifts"><i class="fa fa-book"></i><span>ម៉ោងបិទ</span></a></li>
+                </ul>
+            </li>
+            <li><a href="/Manage/help"><i class="fa fa-book"></i> <span>របៀបចាក់</span></a></li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

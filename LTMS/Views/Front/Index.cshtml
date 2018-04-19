@@ -1,0 +1,1055 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper">
+    @Html.Partial("~/Views/Shared/Partails/_PartialHeader.cshtml");
+    <!-- Left side column. contains the logo and sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialLSidebar.cshtml");
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+        </section>
+        <!-- Main content -->
+        <section class="">
+                @*<div class="col-md-4">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <button type="button" class="btn btn-sm close pull-right" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer clearfix">
+
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </div>*@
+                <!-- /.col -->
+                <div>
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <div class="pull-left">
+                                <button type="button"
+                                        class="btn btn-sm">
+                                    <i class="fa fa-id-card-o"></i> បញ្ញីរ
+                                </button>
+                                <button type="button" id="btnShift" data-value="1" data-toggle="modal" data-target="#mShift" 
+                                        class="btn btn-sm">
+                                    <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>ល្ងាច</span>
+                                </button>
+                                <button type="button" id="btn-before" class="btn btn-sm btn-before">
+                                    <i class="fa fa-arrow-circle-left"></i>
+                                </button>
+                                <input class="" name="sp-date" id="sp-date" style="max-width: 75px;" />
+                                <button type="button" id="btn-next" class="btn btn-sm">
+                                    <i class="fa fa-arrow-circle-right"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm">
+                                    <i class="fa fa-print"></i>
+                                </button>
+                                <label>វគ្គ </label>
+                                <input class="sp-input"  readonly="readonly" value="1" name="input-part" id="sp-session" style="max-width: 50px;">
+                            </div>
+                            <div class="box-tools">
+                                <button type="button" class="btn btn-sm close pull-right" data-widget="collapse" aria-label="Close">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div>
+                            <div>
+                                <div class="box-header with-border">
+                                    <form class="form-horizontal">
+                                        <div class="col">
+                                            <div class="col"  style="width:50% !important; float:left;">
+                                                <div id="fdisplay" class="text-right" style="width:95% !important; padding: 5px;">
+                                                    
+                                                </div>
+
+                                            </div>
+                                            <div class="col" style="width:50% !important; float:left;">
+                                                <div id="play-fun" class="">
+                                                    <div class="form-group">
+                                                        @*<label for="txtPost" class="col-sm-2 control-label">ប៉ុស្តន៍</label>*@
+                                                        <div class="col-sm-10">
+                                                            <input type="text" readonly="readonly" class=" form-control" data-multiplier="1" data-post="3"  id="txtPost" placeholder="ប៉ុស្តន៍">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <input type="text" readonly="readonly" class="form-control sp-input" id="txtNum" placeholder="លេខ">
+                                                            </td>
+                                                            <td>:</td>
+                                                            <td>
+                                                                <input type="text" readonly="readonly" class="form-control sp-input" id="txtAmount" placeholder="ចំនួនប្រាក់">
+                                                            </td>
+                                                        </tr>
+                                                        <tr id="p-sign" data-value="os" style="display: none;">
+                                                            <td>
+                                                                <input type="text" class="form-control sp-input" id="txtINum" placeholder="Sign">
+                                                            </td>
+                                                            <td><i class="fa fa-long-arrow-down"></i></td>
+                                                            <td>
+                                                                <select id="OptType">
+                                                                    <option value="1">ធម្មតា</option>
+                                                                    <option value="2">ក្បាល</option>
+                                                                    <option value="3">កណ្តាល</option>
+                                                                    <option value="4">កន្ទុយ</option>
+                                                                    <option value="5">គុណ</option>
+                                                                    <option value="6">ជឹង</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr id="p-sign-x" data-value="x3" style="display: none;">
+                                                            <td></td>
+                                                            <td>:</td>
+                                                            <td>x3</td>
+                                                        </tr>
+                                                        <tr id="p-last-num" style="display: none;">
+                                                            <td>
+                                                                <input type="text" readonly="readonly" class="form-control sp-input" id="txtNum1" placeholder="លេខ" />
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </table>
+                                                    <input type="hidden" value="1" name="txtPlayType" id="txtPlayType" />
+                                                </div>
+                                                <p></p>
+                                                <div>
+                                                    <div class="btn btn-default col col-xs-3 f-xlarge " data-value="play" id="btnPlay">
+                                                    <i class="fa fa-thumbs-up"></i><span class="hidden-xs">ចាក់</span>
+                                                    </div>
+                                                    <div class="btn btn-default col col-xs-3 f-xlarge " data-value="post" data-toggle="modal" id="btnPost" data-target="#mPost">
+                                                    <i class="fa fa-home"></i><span class="hidden-xs">ប៉ុស្តន៍</span></div>
+                                                    <div class="btn btn-default col col-xs-3 f-xlarge funPlay" data-value="show"><i class="fa fa-print"></i> <span class="hidden-xs">បង្ហាញ</span></div>
+                                                    <div class="btn btn-default col col-xs-3 f-xlarge funPlay" data-value="repay"> <i class="fa fa-dollar"></i> <span class="hidden-xs">សង</span></div>
+                                                </div>
+                                                <div>
+                                                    <div class="btn btn-default col col-xs-3 f-xlarge fPlayType" data-value="2">
+                                                        <i class="fa fa-long-arrow-down"></i>
+                                                        <i class="fa fa-long-arrow-up"></i>  
+                                                        <span class="hidden-xs">អូស</span>
+                                                    </div>
+                                                    <div class="btn btn-default col col-xs-3 f-xlarge fPlayType" data-value="5">
+                                                    * <span class="hidden-xs">គុណ</span>
+                                                    </div>
+                                                    <div class="btn btn-default col col-xs-3 f-xlarge fPlayType" data-value="6">ជឹង</div>
+                                                    <div class="btn btn-default col col-xs-3 f-xlarge fPlayType" data-value="1"><span class="hidden-md hidden-lg">ធ</span><span class="hidden-xs">ធម្មតា</span></div>
+                                                </div>
+                                                <!-- /.box-footer -->
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                       
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid text-center">
+                                <div class="row">
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 funcR" data-value="newSession">វគ្គថ្មី</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 text-red funcR" data-value="removeall"><i class="fa fa-remove"></i></div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 funcR" data-value="remove"><i class="fa fa-remove"></i></div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 funcR" data-value="delete">លុប</div>
+                                </div>
+                                <div class="row">
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="7">7</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="8">8</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="9">9</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 func" data-value="+">*</div>
+                                </div>
+                                <div class="row">
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="4">4</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="5">5</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="6">6</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="+">+</div>
+                                </div>
+                                <div class="row">
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="1">1</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="2">2</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="3">3</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="-">-</div>
+                                </div>
+                                <div class="row">
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value="0">0</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-3 key" data-value=".">.</div>
+                                    <div class="btn f-xxlarge btn-default col col-xs-6 EnterKey" data-value="ok"><i class="fa fa-arrow-left"></i></div>
+                                </div>
+                            </div>
+                            <!-- /.bo0x-body -->
+                            <div class="box-footer">
+
+                            </div>
+                            <!-- /.box-footer -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    @*Modal*@
+    <div class="modal fade" id="mShift" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>ពេល</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center">
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-12 kShift" data-value="1" data-text="ល្ងាច">ល្ងាច</div>
+                            <div class="btn btn-default col col-xs-12 kShift" data-value="2" data-text="យប់">យប់</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-12 kShift" data-value="OK"><i class="fa fa-arrow-left"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="ePost" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>ប៉ុស្តន៍(យប់)</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center">
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="1" data-value="A1" data-multiplier="1">A1</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="2" data-value="A2" data-multiplier="1">A2</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="3" data-value="A3" data-multiplier="1">A3</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="4" data-value="A4" data-multiplier="1">A4</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="5" data-value="A" data-multiplier="1">A</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="6" data-value="B" data-multiplier="1">B</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="7" data-value="C" data-multiplier="1">C</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="8" data-value="D" data-multiplier="1">D</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="9" data-value="H" data-multiplier="1">H</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="10" data-value="AB" data-multiplier="2">AB</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="11" data-value="AC" data-multiplier="2">AC</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="12" data-value="AD" data-multiplier="2">AD</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="13" data-value="AH" data-multiplier="2">AH</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="14" data-value="BH" data-multiplier="2">BH</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="15" data-value="CH" data-multiplier="2">CH</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="16" data-value="HD" data-multiplier="2">HD</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="17" data-value="BD" data-multiplier="2">BD</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="18" data-value="CD" data-multiplier="2">CD</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="19" data-value="ABC" data-multiplier="3">ABC</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="20" data-value="ABD" data-multiplier="3">ABD</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="21" data-value="ACD" data-multiplier="3">ACD</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="22" data-value="BCD" data-multiplier="3">BCD</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="23" data-value="ABH" data-multiplier="3">ABH</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="24" data-value="BCDH" data-multiplier="4">BCDH</div>
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="25" data-value="4P" data-multiplier="4">4P</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="26" data-value="5P" data-multiplier="4">5P</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="27" data-value="Lo2" data-multiplier="32">Lo2</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="28" data-value="Lo3" data-multiplier="25">Lo3</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-12 kpost" data-value="OK"><i class="fa fa-arrow-left"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class=" col-12 modal fade" id="mPost" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>ប៉ុស្តន៍</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center">
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="1" data-value="A" data-multiplier="1">A</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="2" data-value="B" data-multiplier="1">B</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="3" data-value="C" data-multiplier="1">C</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="4" data-value="D" data-multiplier="1">D</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="5" data-value="H" data-multiplier="1">H</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="6" data-value="AB" data-multiplier="2">AB</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="7" data-value="AC" data-multiplier="2">AC</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="8" data-value="AD" data-multiplier="2">AD</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="9" data-value="AH" data-multiplier="2">AH</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="10" data-value="BH" data-multiplier="2">BH</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="11" data-value="CH" data-multiplier="2">CH</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="12" data-value="HD" data-multiplier="2">HD</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="13" data-value="BD" data-multiplier="2">BD</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="14" data-value="CD" data-multiplier="2">CD</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="15" data-value="ABC" data-multiplier="3">ABC</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="16" data-value="ABD" data-multiplier="3">ABD</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="17" data-value="ACD" data-multiplier="3">ACD</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="18" data-value="BCD" data-multiplier="3">BCD</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="19" data-value="ABH" data-multiplier="3">ABH</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="20" data-value="BCDH" data-multiplier="4">BCDH</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="21" data-value="4P" data-multiplier="4">4P</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="22" data-value="5P" data-multiplier="4">5P</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="23" data-value="Lo2" data-multiplier="25">Lo2</div>
+                            <div class="btn btn-default col col-xs-3 f-xlarge kpost" data-id="24" data-value="Lo3" data-multiplier="20">Lo3</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="btn btn-default col col-xs-12 kpost" data-value="OK"><i class="fa fa-arrow-left"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @*End Modal*@
+    <!-- /.content-wrapper -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialFooter.cshtml");
+    <!-- Control Sidebar -->
+    @Html.Partial("~/Views/Shared/Partails/_PartialRSidebar.cshtml");
+    <!-- /.control-sidebar -->
+</div>
+
+@section Scripts
+{
+    <div>
+    <script>
+        //function handleICNumChange(input) {
+
+        //    if (input.value < 0) input.value = 0;
+        //    if (input.value > ) input.value = 100;
+        //}
+        function dRemove(event) {
+            var id = event.closest('.LDisplay'); //("..LDisplay");
+            // alert();
+            id.remove();
+        }
+        $(document).ready(function () {
+
+            var d = new Date();
+            var strDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+
+            $("#sp-date").val(strDate);
+            $("#btnPlay").click(function (event) {
+                alert("btnPlay");
+
+                //// Create Org
+                //$('#e-btnEditAdd').click(function (e) {
+                //    e.preventDefault();
+                //    $('#e-OrgAddress #OrgSMS div.alert').hide();
+                //    var sms = "";
+                //    var error = false;
+                    var validate = true;
+
+
+                if (validate == false) {
+                    alert('false');
+                    return;
+
+                } else {
+
+                    var error_free = true;
+                    var url = "/Font/_save";
+                    //alert(url);
+                    if (!error_free) {
+                        event.preventDefault();
+                    }
+                    else {
+                        //alert('No errors: Form will be submitted');
+                        event.preventDefault();
+                        //Date
+                        //, Shift
+                        //, Number
+                        //, Number1
+                        //, PlayType
+                        //, PlayAmount
+                        //, Status
+                        //, IsDeleted
+                        var HORGADDID= $('#HORGADDID').val();
+                        _Date = $("#sp-date").val();
+                        Shift = $("#btnShift").data("value");
+                       var Multiplier = $("#txtPost").data("multiplier");
+                        Number = $('#txtNum').val();
+                        Number1 = $('#txtNum1').val();
+                        PlayType = $('#txtPlayType').val();
+                        PlayAmount = $("#txtAmount").val();
+                        Email = $('#e-Email').val();
+
+                        data = {
+                            "Date": _Date
+                            ,"Shift1": Shift
+                            , "Number": Number
+                            , "Number1": Number1
+                            , "PostId": 1
+                            , "PlayType": PlayType
+                            , "Multiplier": Multiplier
+                             ,"PlayAmount": PlayAmount
+                        }
+
+                        $.post(url, data, function (data) {
+                            //  alert(data);
+                            if (data.Result == "OK") {
+                                alert(data.Result);
+                            } else {
+                                alert(data.Result);
+                                //$('#dialogOrgMember #dialogContent').scrollTop(0);
+                            }
+
+                        });
+
+
+                    }
+                }
+            });
+
+        });
+
+        $("#btn-next").click(function (event) {
+            var _date = $("#sp-date").val();
+            var someDate = new Date(_date);
+            someDate.setDate(someDate.getDate() + 1); //number  of days to add, e.x. 15 days
+            var dateFormated = someDate.toISOString().substr(0, 10);
+            $("#sp-date").val(dateFormated);
+        });
+
+        $("#btn-before").click(function (event) {
+            var _date = $("#sp-date").val();
+            var someDate = new Date(_date);
+            someDate.setDate(someDate.getDate() - 1); //number  of days to add, e.x. 15 days
+            var dateFormated = someDate.toISOString().substr(0, 10);
+            $("#sp-date").val(dateFormated);
+        });
+        $(".dRemove").click(function (event) {
+            //var $div = $(this).parents('div[class^="LDispla"]');
+            //$div.html('');
+            var id = $(this).closest(".LDisplay");
+
+            //alert(id.html());
+            id.remove();
+
+        });
+        $(".funPlay").click(function (event) {
+            var _Post = $("#txtPost").val();
+            var _PlayType = $("#txtPlayType").val();
+            var _Num = $("#txtNum").val();
+            var _INum = $("#txtINum").val();
+            var _Amount = $("#txtAmount").val();
+
+            if (_Post == '') {
+                alert("សូមជ្រើសរើសប៉ុស្តន៍!..");
+                //$("#txtNum").focus();
+                return;
+            }
+
+            if (_Num == '') {
+                alert("សូមជ្រើសរើសលេខចាក់!..");
+                return;
+            }
+            if (_Amount == '') {
+                alert("សូមជ្រើសចំនួនប្រាក់!..");
+                return;
+            }
+            if (_PlayType == '') {
+                _PlayType = 0;
+            }
+
+            var _num = $("#txtNum").val();
+            var _num1 = $("#txtNum1").val();
+            var _Post = $("#txtPost").val();
+            //   var _Amount = $("#txtAmount").val();
+            var _PlayType = $("#txtPlayType").val();
+            var _postValue = $("#txtPost").data("multiplier");
+
+            // alert(_postValue + _Amount);
+
+            var _total = 0;
+            var _LDisplay = "";
+            var _commision = 70;
+            var _TotalCommision = 0;
+
+            _total = (TryParseInt(_Amount, 0)) * (_postValue);
+            _TotalCommision = _total * _commision / 100;
+            // alert(_PlayType + "::" + _Amount);
+            if (_PlayType == "1") {
+
+                _total = ((_Amount) * (_postValue));
+                _TotalCommision = _total * _commision / 100;
+                _LDisplay = '<div class="LDisplay"> ' +
+                                '<div class="dSession" style="padding-right:20px; font:larger;">(' + $("#sp-session").val() + ') <span class="dPost" data-value="3">' + $("#txtPost").val() + '</span> <i class="glyphicon glyphicon-remove text-red dRemove" onclick="dRemove(this);"></i></div> ' +
+                                '<table class="text-right pull-right sptb-display"> ' +
+                                '    <tbody> ' +
+                                '        <tr> ' +
+                                '            <td>' + $("#txtNum").val() + '</td> ' +
+                                '            <td>:</td> ' +
+                                '            <td>' + $("#txtAmount").val() + '$</td> ' +
+                                '        </tr> ' +
+                                '    </tbody> ' +
+                                '    <tfoot> ' +
+                                '        <tr> ' +
+                                '            <td>សរ</td> ' +
+                                '            <td>=</td> ' +
+                                '            <td>+' + _total + '</td> ' +
+                                '        </tr> ' +
+                                '        <tr> ' +
+                                '            <td>'+ _commision +'</td> ' +
+                                '            <td>:</td> ' +
+                                '            <td>'+ _TotalCommision +'</td> ' +
+                                '        </tr> ' +
+                                '    </tfoot> ' +
+                                '</table> ';
+                '</div>';
+
+            } else if (_PlayType == "2") {
+                _total = ((TryParseInt(_Amount, 0)) * (_postValue)) * _INum;
+                _TotalCommision = _total * _commision / 100;
+                _LDisplay = '<div class="LDisplay"> ' +
+                               '<div class="dSession" style="padding-right:20px;font:larger;font-size: large;font-weight: bold;font-family: arial;">(' + $("#sp-session").val() + ') <span class="dPost" data-value="3">' + $("#txtPost").val() + '</span> <i class="glyphicon glyphicon-remove text-red dRemove" onclick="dRemove(this);"></i></div> ' +
+                               '<table class="text-right pull-right sptb-display"> ' +
+                               '    <tbody> ' +
+                               '        <tr> ' +
+                               '            <td>' + $("#txtNum").val() + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + $("#txtAmount").val() + '$</td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                               '            <td>(' + _INum + '):</td> ' +
+                               '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td>' + $("#txtNum1").val() +'</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + $("#txtAmount").val() + '$</td> ' +
+                               '        </tr> ' +
+                               '    </tbody> ' +
+                               '    <tfoot> ' +
+                               '        <tr> ' +
+                               '            <td>សរ</td> ' +
+                               '            <td>=</td> ' +
+                               '            <td>+' + _total + '</td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td>' + _commision + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + _TotalCommision + '</td> ' +
+                               '        </tr> ' +
+                               '    </tfoot> ' +
+                               '</table> ';
+                '</div>';
+            } else if (_PlayType == "3") {
+
+                _total = ((TryParseInt(_Amount, 0)) * (_postValue)) * _INum;
+                _TotalCommision = _total * _commision / 100;
+                _LDisplay = '<div class="LDisplay"> ' +
+                               '<div class="dSession" style="padding-right:20px; font:larger;">(' + $("#sp-session").val() + ') <span class="dPost" data-value="3">' + $("#txtPost").val() + '</span> <i class="glyphicon glyphicon-remove text-red dRemove" onclick="dRemove(this);"></i></div> ' +
+                               '<table class="text-right pull-right sptb-display"> ' +
+                               '    <tbody> ' +
+                               '        <tr> ' +
+                               '            <td>' + $("#txtNum").val() + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + $("#txtAmount").val() + '$</td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                               '            <td>(' + _INum + '):</td> ' +
+                               '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td>' + $("#txtNum1").val()  +'</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + $("#txtAmount").val() + '$</td> ' +
+                               '        </tr> ' +
+                               '    </tbody> ' +
+                               '    <tfoot> ' +
+                               '        <tr> ' +
+                               '            <td>សរ</td> ' +
+                               '            <td>=</td> ' +
+                               '            <td>+' + _total + '</td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td>' + _commision + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + _TotalCommision + '</td> ' +
+                               '        </tr> ' +
+                               '    </tfoot> ' +
+                               '</table> ';
+                '</div>';
+            }
+            else if (_PlayType == "4") {
+
+                _total = ((TryParseInt(_Amount, 0)) * (_postValue)) * _INum;
+                _TotalCommision = _total * _commision / 100;
+
+                _LDisplay = '<div class="LDisplay"> ' +
+                               '<div class="dSession" style="padding-right:20px; font:larger;">(' + $("#sp-session").val() + ') <span class="dPost" data-value="3">' + $("#txtPost").val() + '</span> <i class="glyphicon glyphicon-remove text-red dRemove" onclick="dRemove(this);"></i></div> ' +
+                               '<table class="text-right pull-right sptb-display"> ' +
+                               '    <tbody> ' +
+                               '        <tr> ' +
+                               '            <td>' + $("#txtNum").val() + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + $("#txtAmount").val() + '$</td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                               '            <td>(' + _INum + '):</td> ' +
+                               '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td>' + $("#txtNum1").val() + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + $("#txtAmount").val() + '$</td> ' +
+                               '        </tr> ' +
+                               '    </tbody> ' +
+                               '    <tfoot> ' +
+                               '        <tr> ' +
+                               '            <td>សរ</td> ' +
+                               '            <td>=</td> ' +
+                               '            <td>+' + _total + '</td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td>' + _commision + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + _TotalCommision + '</td> ' +
+                               '        </tr> ' +
+                               '    </tfoot> ' +
+                               '</table> ';
+                '</div>';
+            } else if (_PlayType == "5") {
+
+                var _numDigLeng = $("#txtNum").val().length;
+                var _txtNum = $("#txtNum").val();
+                var _dx = 1;
+
+                alert(_txtNum.substr(0, 1) + ":" + _txtNum.substr(1, 1) + ":" + _txtNum.substr(2, 1));
+                if (_numDigLeng > 2) {
+                    if (_txtNum.substr(0, 1) == _txtNum.substr(1, 1) == _txtNum.substr(2, 1)) {
+                        _dx = 1;
+                    } else if (_txtNum.substr(0, 1) == _txtNum.substr(1, 1)) {
+                        _dx = 3;
+                    } else if (_txtNum.substr(0, 1) == _txtNum.substr(2, 1)) {
+                        _dx = 3;
+                    } else if (_txtNum.substr(1, 1) == _txtNum.substr(2, 1)) {
+                        _dx = 3;
+                    } else {
+                        _dx = 6;
+                    }
+                } else {
+                    if (_txtNum.substr(0, 1) != _txtNum.substr(1, 1)) {
+                        _dx = 2;
+                    } else{
+                        _dx = 1;
+                    }
+                }
+
+                alert(_dx);
+                _total = (( TryParseInt(_Amount, 0)) * (_postValue) ) * _dx;
+                _TotalCommision = _total * _commision / 100 ;
+
+                _LDisplay = '<div class="LDisplay"> ' +
+                              '<div class="dSession" style="padding-right:20px; font:larger;">(' + $("#sp-session").val() + ') <span class="dPost" data-value="3">' + $("#txtPost").val() + '</span> <i class="glyphicon glyphicon-remove text-red dRemove" onclick="dRemove(this);"></i></div> ' +
+                              '<table class="text-right pull-right sptb-display"> ' +
+                              '    <tbody> ' +
+                              '        <tr> ' +
+                              '            <td>' + $("#txtNum").val() + '</td> ' +
+                              '            <td>:</td> ' +
+                              '            <td>' + $("#txtAmount").val() + '$</td> ' +
+                              '        </tr> ' +
+                              '        <tr> ' +
+                              '            <td>*</td> ' +
+                              '            <td>:</td> ' +
+                              '            <td>(គុណ)</td> ' +
+                              '        </tr> ' +
+                              '    </tbody> ' +
+                              '    <tfoot> ' +
+                              '        <tr> ' +
+                              '            <td>សរ</td> ' +
+                              '            <td>=</td> ' +
+                              '            <td>+' + _total + '</td> ' +
+                              '        </tr> ' +
+                              '        <tr> ' +
+                              '            <td>' + _commision + '</td> ' +
+                              '            <td>:</td> ' +
+                              '            <td>' + _TotalCommision + '</td> ' +
+                              '        </tr> ' +
+                              '    </tfoot> ' +
+                              '</table> ';
+                '</div>';
+            }
+
+            //if(1){
+
+            //}
+
+
+
+            //alert(_LDisplay);
+            var _value = $(this).data("value");
+            //alert(_value);
+            if (_value == 'show') {
+                $("#fdisplay").html(_LDisplay);
+
+            } else if (_value == 'removeall') {
+
+            }
+
+        });
+
+        $(".fPlayType").click(function (event) {
+
+            //alert(_LDisplay);
+            var _value = $(this).data("value");
+            //alert(_value);
+            var _cPlayType = $("#txtPlayType").val();
+
+            if (_value == '2') {
+                if (_value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").show();
+                    $("#p-sign").show();
+                    $("#OptType").val(2);
+                    $("#txtPlayType").val(_value);
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign").hide();
+                    $("#txtPlayType").val(1);
+                }
+
+            } else if (_value == '5') {
+                if (_value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign-x").show();
+
+                    $("#txtPlayType").val(_value);
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign").hide();
+                    $("#txtPlayType").val(1);
+                }
+            }
+            else if (_value == '6') {
+                if ( _value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign-x").show();
+
+                    $("#txtPlayType").val(_value);
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign").hide();
+                    $("#txtPlayType").val(1);
+                }
+            }
+
+            else if (_value == '1') {
+                $("#p-sign").hide();
+                $("#p-sign-x").hide();
+                $("#p-last-num").hide();
+                $("#txtPlayType").val(_value);
+            }
+
+        });
+
+        $("#txtINum").change(function () {
+
+            var _oNum = $("#OptType").val();
+
+            var _Num = $("#txtNum").val();
+
+            var _incNum = $("#txtINum").val();
+
+            var _Num2 = 0;
+            //alert(_oNum);
+
+            if (_oNum == "2") {
+                //alert();
+                var _a = _Num.substr(0, 1);
+                var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+                if (_b > 9) {
+                    _b = 9;
+                    _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                    $("#txtINum").val(_incNum);
+                }
+
+                if (_b > 0) {
+
+                    var _c = _Num.substr(1, 3);
+
+                    _Num = $("#txtNum1").val(_b + _c);
+                }
+
+            } else if (_oNum == "3") {
+                if (_Num.length > 2) {
+
+                    var _a = _Num.substr(1, 1);
+
+                    var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+
+                    if (_b > 9) {
+
+                        _b = 9;
+                        _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                        $("#txtINum").val(_incNum);
+                    }
+
+                    if (_b > 0) {
+                        var _c = _Num.substr(0, 1);
+                        var _d = _Num.substr(2, 1);
+                        _Num = $("#txtNum1").val( _c + _b + _d);
+                    }
+
+                } else {
+
+                }
+            } else if (_oNum == "4") {
+                if (_Num.length > 2) {
+                    var _a = _Num.substr(2, 1);
+                    var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+                    var _c = _Num.substr(0, 2);
+                    if (_b > 9) {
+                        _b = 9;
+                        _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                        $("#txtINum").val(_incNum);
+                    }
+
+                    if (_b > 0) {
+                        _Num = $("#txtNum1").val(_c + _b);
+                    }
+
+                } else {
+                    var _a = _Num.substr(1, 1);
+                    var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+                    var _c = _Num.substr(0, 1);
+                    if (_b > 9) {
+                        _b = 9;
+                        _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                        $("#txtINum").val(_incNum);
+                    }
+
+                    if (_b > 0) {
+                        _Num = $("#txtNum1").val(_c + _b);
+                    }
+                }
+
+            }
+
+        });
+
+        
+
+        $(".key").click(function (event) {
+            var _value = $(this).data("value");
+            //  alert(_value);
+            // var olval = $('.sp-input').val() + _value;
+            //_value = valitValueMaxNum(_value,1,999)
+            $('.spselected').val($('.spselected').val() + _value);
+
+            var spvalue = TryParseInt($('.spselected').val(),00);
+
+            if (spvalue > 999) {
+                $('.spselected').val(999);
+            }
+
+            // $('.spselected').val($('.spselected').val() + _value);
+            $("#txtINum").change();
+        });
+        $("#OptType").change(function (event) {
+            $("#txtINum").change();
+
+            //alert(_LDisplay);
+            var _value = $("#OptType").val();
+            //alert(_value);
+            var _cPlayType = $("#txtPlayType").val();
+
+            if (_value == '2' || _value == '3' || _value == '4') {
+                if (_value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").show();
+                    $("#p-sign").show();
+                    $("#txtPlayType").val(_value);
+
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").show();
+                    $("#p-sign").show();
+                    $("#txtPlayType").val(_value);
+                }
+
+            } else if (_value == '5') {
+                if (_value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").show();
+                    $("#p-sign-x").show();
+
+                    $("#txtPlayType").val(_value);
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign").hide();
+                    $("#txtPlayType").val(1);
+                }
+            }
+            else if (_value == '6') {
+                if (_value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign-x").show();
+
+                    $("#txtPlayType").val(_value);
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign").hide();
+                    $("#txtPlayType").val(1);
+                }
+            }
+
+            else if (_value == '1') {
+                $("#p-sign").hide();
+                $("#p-sign-x").hide();
+                $("#p-last-num").hide();
+                $("#txtPlayType").val(_value);
+            }
+            if ($("#OptType").val() == "1") {
+
+            }
+
+        });
+
+        $(".funcR").click(function (event) {
+            var _value = $(this).data("value");
+            //alert(_value);
+            if (_value == 'remove') {
+                var olval = $('.spselected').val();
+                var value = olval.substring(0, olval.length - 1);
+                $('.spselected').val(value);
+            } else if (_value == 'removeall') {
+                //     var olval = $('.spselected').val();
+                //var value = olval.substring(0, olval.length - 1);
+                $('.spselected').val('');
+
+            } else if (_value == 'newSession') {
+                var _val = $("#sp-session").val();
+                $("#sp-session").val(parseInt(_val) + 1);
+            }
+        });
+
+        //Shift
+        $(".kShift").click(function (event) {
+            var _value = $(this).data("value");
+            var _txt = $(this).data("text");
+            if (_value != "OK") {
+                //$("#btnShift").val(_value);
+                $('#btnShift').data('value', _value);
+                $('#shift-text').text( _txt);
+                if (_value != "1") {
+                    $('#btnPost').attr("data-target", "#ePost");
+                } else {
+                    $('#btnPost').attr("data-target", "#mPost");
+                }
+               
+            } else {
+                $("#mShift").modal("hide");
+            }
+        });
+        // al
+        $(".kpost").click(function (event) {
+            var _value = $(this).data("value");
+            var _multiplier = $(this).data('multiplier');
+            //alert(_value);
+            if (_value != "OK") {
+                $("#txtPost").val(_value);
+                // alert(_multiplier);
+                $("#txtPost").data("multiplier", _multiplier);
+                $('#txtPost').attr("data-multiplier", _multiplier);
+            } else {
+
+                $("#mPost").modal("hide");
+                $("#ePost").modal("hide");
+            }
+            // alert(_value);
+        });
+
+        $('.sp-input').click(function () {
+            $('.sp-input').removeClass('spselected');
+            $(this).addClass('spselected');
+        });
+
+       // });
+    </script>
+</div>
+
+}

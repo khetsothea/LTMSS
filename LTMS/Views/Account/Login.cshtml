@@ -1,0 +1,1355 @@
+﻿@model LTMS.Models.Lotteries.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="login-box">
+
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">@Html.ValidationSummary(false, "", new { @class = "text-danger" })</p>
+
+        <form action="" method="post">
+            <div class="clearfix"></div>
+            <input hidden value="@Request.QueryString["ReturnUrl"]" name="ReturnUrl" id="ReturnUrl" />
+            <div class="form-group row">
+                <label for="UserName" class="col-xs-3 col-form-label">លេខទូរស័ព្ទ</label>
+                <div class="col-xs-7">
+                    <input type="text" class="form-control sp-input" name="UserName" id="UserName" placeholder="">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Password" class="col-xs-3 col-form-label">លេខសម្ងាត់​:</label>
+                <div class="col-xs-7">
+                    <input type="password" class="form-control sp-input" name="Password" id="Password" placeholder="">
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="btn-block">
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 key" data-value="7" style="min-height:80px;">7</button>
+                        </div>
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 key" data-value="8" style="min-height:80px;">8</button>
+                        </div>
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 key" data-value="9" style="min-height:80px;">9</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="btn-block">
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 key" data-value="4" style="min-height:80px;">4</button>
+                        </div>
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 key" data-value="5" style="min-height:80px;">5</button>
+                        </div>
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 key" data-value="6" style="min-height:80px;">6</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="btn-block">
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 key" data-value="1" style="min-height:80px;">1</button>
+                        </div>
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 key" data-value="2" style="min-height:80px;">2</button>
+                        </div>
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 key" data-value="3" style="min-height:80px;">3</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="btn-block">
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 key" data-value="0" style="min-height:80px;">0</button>
+                        </div>
+                        <div class=" col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12 sp-btn funcR" data-value="remove" style="min-height:80px;">x</button>
+                        </div>
+                        <div class="col-xs-4" style="padding:3px;">
+                            <button class="btn col-xs-12" data-value="1" style="min-height:80px;">&lt;-</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+
+@*End Modal*@
+@section Scripts
+{
+    <div>
+        <script>
+        //function handleICNumChange(input) {
+        //    if (input.value < 0) input.value = 0;
+        //    if (input.value > ) input.value = 100;
+        //}
+        function dRemove(event) {
+            var id = event.closest('.LDisplay'); //("..LDisplay");
+            var HORGADDID = $('#HORGADDID').val();
+            _Date = $("#sp-date").val();
+
+            var _Date = event.getAttribute("data-PlayDate");
+            var Shift = event.getAttribute("data-Shift");
+            var Post = event.getAttribute("data-Post");
+            var Session = event.getAttribute("data-Session");
+            var CustomerID = event.getAttribute("data-CustomerID");
+           // alert(_Date);
+            data = {
+                "PlayDate": _Date
+                , "Shift": Shift
+                , "Post": Post
+                , "Session": Session
+                , "CustomerID": CustomerID
+            }
+            var url = "/Front/_cancelplayP";
+            $.post(url, data, function (data) {
+                //  alert(data);
+                if (data.Status == "OK") {
+                    $("#fdisplay").html("");
+                    $("#spLoad").click();
+
+                } else {
+                    alert(data.Result);
+                    //$('#dialogOrgMember #dialogContent').scrollTop(0);
+                }
+            });
+
+        }
+        $(document).ready(function () {
+            // GET CURRENT DATE
+            var date = new Date();
+            $('.sp-input').removeClass('spselected');
+            $("#txtNum").addClass("spselected");
+            // GET YYYY, MM AND DD FROM THE DATE OBJECT
+            var yyyy = date.getFullYear().toString();
+            var mm = (date.getMonth() + 1).toString();
+            var dd = date.getDate().toString();
+
+            // CONVERT mm AND dd INTO chars
+            var mmChars = mm.split('');
+            var ddChars = dd.split('');
+
+            // CONCAT THE STRINGS IN YYYY-MM-DD FORMAT
+            var datestring = yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+            $("#sp-date").val(datestring);
+
+
+        });
+
+        function loanPlay() {
+            // alert("#spLoad");
+            $("#fdisplay").html("");
+            //$("#spLoad").click();
+            // Do your processing.
+            //var _postValue = $(this).data("post");
+            //alert("#spPlay" + i + _postValue);
+            //i += 1;
+            //var d = new Date();
+            //var strDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+
+            var validate = true;
+            if (validate == false) {
+                alert('false');
+                return;
+            } else {
+
+                var error_free = true;
+                var url = "/Front/_LoadPlay";
+                //alert(url);
+                if (!error_free) {
+                    //event.preventDefault();
+                }
+                else {
+                    //alert('No errors: Form will be submitted');
+                    //event.preventDefault();
+
+                    var HORGADDID = $('#HORGADDID').val();
+                    var _Date = $("#sp-date").val();
+                   var Shift = $("#btnShift").data("value");
+                   var Session = $("#sp-session").val();
+
+                    data = {
+                        "PlayDate": _Date
+                        , "Shift": Shift
+                        , "Session": Session
+                        , "CustomerID": 1
+                    }
+
+                    $.post(url, data, function (data) {
+                        //  alert(data);
+                        if (data.Status == "OK") {
+                            // PlayID
+                            var _post = '';
+                            var _PDisplay = "";
+                            var i = 0;
+                            var _t = data.Total;
+                            $.each(data.Result, function (i, item) {
+                                //alert(item.PlayID);
+
+                                if (_post != item.Post) {
+                                    if (i > 0) {
+                                        _PDisplay += '		</tbody>' +
+                                                    '	</table>' +
+                                                    '</div>';
+
+                                    }
+                                    _PDisplay += '<div class="LDisplay" id="' + item.PlayID + '">' +
+                                                '	<div class="dSession" id="' + item.PlayID + '" onclick="dRemove(this);" style="padding-right:20px; font:larger;"data-Post="' + item.Post + '" data-PlayDate="' + item.PlayDate + '" data-Shift="' + item.Shift + '" data-Session="' + item.Session + '" data-CustomerID="' + item.CustomerID + '" data-playtype="1" data-postmultiplier="4">' +
+                                                '	(1) <span class="dPost" data-value="3">' + item.Post + '</span> ' +
+                                                '	<i class="glyphicon glyphicon-remove text-red dRemove"></i>' +
+                                                '	</div>' +
+                                                '	<table class="text-right pull-right sptb-display" id="' + item.Post + '">' +
+                                                '		<tbody>';
+
+                                    if (item.PlayType == 1) {
+                                        _PDisplay += '			<tr class="trP" data-post="' + item.Post + '" data-playamount="' + item.PlayAmount + '" data-number="' + item.Number + '" data-number1="' + item.Number1 + '" data-numincrease="" data-playtype="1" data-postmultiplier="4">' +
+                                                    '				<td>' + item.Number + '</td>' +
+                                                    '				<td>:</td>' +
+                                                    '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                    '				</tr>';
+                                    } else if (item.PlayType == 2) {
+                                        _PDisplay += '			<tr class="trP" data-post="' + item.Post + '" data-playamount="' + item.PlayAmount + '" data-number="' + item.Number + '" data-number1="' + item.Number1 + '" data-numincrease="" data-playtype="1" data-postmultiplier="4">' +
+                                                '				<td>' + item.Number + '</td>' +
+                                                '				<td>:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '				</tr>' +
+                                                '				<td><span><i class="fa fa-long-arrow-down"></i></span></td>' +
+                                                '				<td>(' + item.NumIncrease + '):</td>' +
+                                                '				<td><span><i class="fa fa-long-arrow-down"></i></span></td>' +
+                                                '				</tr>'+
+                                                '			<tr>' +
+                                                '				<td>' + item.Number1 + '</td>' +
+                                                '				<td>:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '		    </tr>';
+                                    } else if (item.PlayType == 5) {
+                                        _PDisplay += '			<tr class="trP" data-post="' + item.Post + '" data-playamount="' + item.PlayAmount + '" data-number="' + item.Number + '" data-number1="' + item.Number1 + '" data-numincrease="" data-playtype="1" data-postmultiplier="4">' +
+                                                '				<td>' + item.Number + '</td>' +
+                                                '				<td>x:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '				</tr>';
+                                    }
+
+                                } else {
+
+                                    //_PDisplay +=
+                                    //           '			<tr class="trP" data-post="' + item.Post + '" data-playamount="' + item.PlayAmount + '" data-number="' + item.Number + '" data-number1="' + item.Number1 + '" data-numincrease="" data-playtype="1" data-postmultiplier="4">' +
+                                    //           '				<td>' + item.Number + '</td>' +
+                                    //           '				<td>:</td>' +
+                                    //           '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                    //           '			</tr>';
+                                    if (item.PlayType == 1) {
+                                        _PDisplay += '			<tr class="trP" data-post="' + item.Post + '" data-playamount="' + item.PlayAmount + '" data-number="' + item.Number + '" data-number1="' + item.Number1 + '" data-numincrease="" data-playtype="1" data-postmultiplier="4">' +
+                                                    '				<td>' + item.Number + '</td>' +
+                                                    '				<td>:</td>' +
+                                                    '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                    '				</tr>';
+                                    } else if (item.PlayType == 2) {
+                                        _PDisplay += '			<tr class="trP" data-post="' + item.Post + '" data-playamount="' + item.PlayAmount + '" data-number="' + item.Number + '" data-number1="' + item.Number1 + '" data-numincrease="" data-playtype="1" data-postmultiplier="4">' +
+                                                '				<td>' + item.Number + '</td>' +
+                                                '				<td>:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '				</tr>' +
+                                                '				<td><span><i class="fa fa-long-arrow-down"></i></span></td>' +
+                                                '				<td>(' + item.NumIncrease + '):</td>' +
+                                                '				<td><span><i class="fa fa-long-arrow-down"></i></span></td>' +
+                                                '				</tr>' +
+                                                '			<tr>' +
+                                                '				<td>' + item.Number1 + '</td>' +
+                                                '				<td>:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '		    </tr>';
+                                    } else if (item.PlayType == 5) {
+                                        _PDisplay += '			<tr class="trP" data-post="' + item.Post + '" data-playamount="' + item.PlayAmount + '" data-number="' + item.Number + '" data-number1="' + item.Number1 + '" data-numincrease="" data-playtype="1" data-postmultiplier="4">' +
+                                                '				<td>' + item.Number + '</td>' +
+                                                '				<td>x:</td>' +
+                                                '				<td>' + item.PlayAmount + ' ៛ </td>' +
+                                                '				</tr>';
+                                    }
+                                }
+
+                                _post = item.Post;
+                                i = i + 1;
+                            });
+                            if (i > 0) {
+                                _PDisplay += '		</tbody>' +
+                                            '	</table>' +
+                                            '</div>';
+
+                            }
+                            $("#fdisplay").html("");
+                            $("#fdisplay").html(_PDisplay);
+                            var _totalString = '<p class="pSessionline"> </p>' +
+                                                '<div class="dSession" style="padding-right:20px; font:larger;">' +
+                                                '	<table class="text-right pull-right sptb-display" id="tblTotal">' +
+                                                '		<tbody>' +
+                                                '			<tr>' +
+                                                '				<td>សរ</td>' +
+                                                '				<td>=</td>' +
+                                                '				<td>' + _t + '</td>' +
+                                                '				<td></td>' +
+                                                '			</tr>' +
+                                                '			<tr>' +
+                                                '				<td>100</td>' +
+                                                '				<td>:</td>' +
+                                                '				<td>'+ _t +'</td>' +
+                                                '				<td></td>' +
+                                                '			</tr>' +
+                                                '		</tbody>' +
+                                                '	</table>' +
+                                                '</div>';
+                            if (_t != 0) {
+                                $("#fdisplay").append(_totalString);
+                            }
+
+                        } else {
+                            alert(data.Result);
+                            //$('#dialogOrgMember #dialogContent').scrollTop(0);
+                        }
+                    });
+                }
+            }
+            return false;
+        }
+        $("#btn-next").click(function (event) {
+            var _date = $("#sp-date").val();
+            var someDate = new Date(_date);
+            someDate.setDate(someDate.getDate() + 1); //number  of days to add, e.x. 15 days
+            var dateFormated = someDate.toISOString().substr(0, 10);
+            $("#sp-date").val(dateFormated);
+            loanPlay();
+        });
+
+        $("#btn-before").click(function (event) {
+            var _date = $("#sp-date").val();
+            var someDate = new Date(_date);
+            someDate.setDate(someDate.getDate() - 1); //number  of days to add, e.x. 15 days
+            var dateFormated = someDate.toISOString().substr(0, 10);
+            $("#sp-date").val(dateFormated);
+            loanPlay();
+        });
+        //$(".dRemove").click(function (event) {
+        //    //var $div = $(this).parents('div[class^="LDispla"]');
+        //    //$div.html('');
+        //    var id = $(this);
+
+        //    //alert(id.html());
+        //    id.remove();
+
+        //};
+        $(".funPlay").click(function (event) {
+            var _Post = $("#txtPost").val();
+            var _PlayType = $("#txtPlayType").val();
+            var _Num = $("#txtNum").val();
+            var _INum = $("#txtINum").val();
+            var _Amount = $("#txtAmount").val();
+            var _Post = '';
+            var _num = $("#txtNum").val();
+            var _num1 = $("#txtNum1").val();
+            var _Post = $("#txtPost").val();
+            if (_Post == '') {
+                alert("សូមជ្រើសរើសប៉ុស្តន៍!..");
+                //$("#txtNum").focus();
+                return;
+            }
+
+            if (_Num == '') {
+                alert("សូមជ្រើសរើសលេខចាក់!..");
+                $('.sp-input').removeClass('spselected');
+                $("#txtNum").addClass("spselected");
+                return;
+            }
+
+            if (_PlayType == "2") {
+                if (_num1 == '') {
+                    alert("សូមជ្រើសរើសប៉ុស្តន៍!..");
+                    //$("#txtNum").focus();
+                    return;
+                }
+            }
+
+            if (_Amount == '') {
+                alert("សូមជ្រើសចំនួនប្រាក់!..");
+                $('.sp-input').removeClass('spselected');
+                $("#txtAmount").addClass("spselected");
+                return;
+            }
+            if (_PlayType == '') {
+                _PlayType = 0;
+            }
+
+            //   var _Amount = $("#txtAmount").val();
+            var _PlayType = $("#txtPlayType").val();
+            var _postValue = $("#txtPost").data("multiplier");
+
+            // alert(_postValue + _Amount);
+
+            var _total = 0;
+            var _LDisplay = "";
+            var _commision = 70;
+            var _TotalCommision = 0;
+            if (!_postValue) {
+                _postValue = 1;
+            }
+            _total = (TryParseInt(_Amount, 0)) * (_postValue);
+            _TotalCommision = _total * _commision / 100;
+            // alert(_PlayType + "::" + _Amount);
+            if (_PlayType == "1") {
+                _total = ((_Amount) * (_postValue));
+                _TotalCommision = _total * _commision / 100;
+                _LDisplay =
+                               '        <tr class="trD" '
+                                + ' data-post="' + _Post + '"'
+                                + ' data-PlayAmount="' + _Amount + '"'
+                                + ' data-number="' + _num + '"'
+                                + ' data-number1="' + _num1 + '"'
+                                + ' data-NumIncrease="' + _INum + '"'
+                                + ' data-PlayType="' + _PlayType + '"'
+                                + ' data-PostMultiplier="' + _postValue + '">' +
+                                '            <td>' + $("#txtNum").val() + '</td> ' +
+                                '            <td>:</td> ' +
+                                '            <td>' + $("#txtAmount").val() + ' ៛ </td> ' +
+                                '        </tr> ';
+
+            } else if (_PlayType == "2") {
+                _total = ((TryParseInt(_Amount, 0)) * (_postValue)) * _INum;
+                _TotalCommision = _total * _commision / 100;
+                _LDisplay =
+                               '        <tr class="trD" '
+                                + ' data-post="' + _Post + '"'
+                                + ' data-PlayAmount="' + _Amount  + '"'
+                                + ' data-number="' + _num + '"'
+                                + ' data-number1="' + _num1 + '"'
+                                + ' data-NumIncrease="' + _INum + '"'
+                                + ' data-PlayType="' + _PlayType + '"'
+                                + ' data-PostMultiplier="' + _postValue + '">' +
+                               '            <td>' + $("#txtNum").val() + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + $("#txtAmount").val() + ' ៛ </td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                               '            <td>:</td> ' +
+                               '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td>' + $("#txtNum1").val() + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + $("#txtAmount").val() + ' ៛ </td> ' +
+                               '        </tr> ';
+            } else if (_PlayType == "3") {
+
+                _total = ((TryParseInt(_Amount, 0)) * (_postValue)) * _INum;
+                _TotalCommision = _total * _commision / 100;
+                _LDisplay = '        <tr class="trD" '
+                                + ' data-post="' + _Post + '"'
+                                + ' data-PlayAmount="' + _Amount  + '"'
+                                + ' data-number="' + _num + '"'
+                                + ' data-number1="' + _num1 + '"'
+                                + ' data-NumIncrease="' + _INum + '"'
+                                + ' data-PlayType="' + _PlayType + '"'
+                                + ' data-PostMultiplier="' + _postValue + '">' +
+                              '            <td>' + $("#txtNum").val() + '</td> ' +
+                              '            <td>:</td> ' +
+                              '            <td>' + $("#txtAmount").val() + ' ៛ </td> ' +
+                              '        </tr> ' +
+                              '        <tr> ' +
+                              '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                              '            <td>(' + _INum + '):</td> ' +
+                              '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                              '        </tr> ' +
+                              '        <tr> ' +
+                              '            <td>' + $("#txtNum1").val() + '</td> ' +
+                              '            <td>:</td> ' +
+                              '            <td>' + $("#txtAmount").val() + ' ៛ </td> ' +
+                              '        </tr> ';
+            }
+            else if (_PlayType == "4") {
+
+                _total = ((TryParseInt(_Amount, 0)) * (_postValue)) * _INum;
+                _TotalCommision = _total * _commision / 100;
+
+                _LDisplay =
+                                '        <tr class="trD" '
+                                + ' data-post="' + _Post + '"'
+                                + ' data-PlayAmount="' + _Amount  + '"'
+                                + ' data-number="' + _num + '"'
+                                + ' data-number1="' + _num1 + '"'
+                                + ' data-NumIncrease="' + _INum + '"'
+                                + ' data-PlayType="' + _PlayType + '"'
+                                + ' data-PostMultiplier="' + _postValue + '">' +
+                               '            <td>' + $("#txtNum").val() + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + $("#txtAmount").val() + ' ៛ </td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                               '            <td>:</td> ' +
+                               '            <td><span><i class="fa fa-long-arrow-down"></i></span></td> ' +
+                               '        </tr> ' +
+                               '        <tr> ' +
+                               '            <td>' + $("#txtNum1").val() + '</td> ' +
+                               '            <td>:</td> ' +
+                               '            <td>' + $("#txtAmount").val() + ' ៛ </td> ' +
+                               '        </tr> ';
+            } else if (_PlayType == "5") {
+
+                var _numDigLeng = $("#txtNum").val().length;
+                var _txtNum = $("#txtNum").val();
+                var _dx = 1;
+
+                //alert(_txtNum.substr(0, 1) + ":" + _txtNum.substr(1, 1) + ":" + _txtNum.substr(2, 1));
+                if (_numDigLeng > 2) {
+                    if (_txtNum.substr(0, 1) == _txtNum.substr(1, 1) == _txtNum.substr(2, 1)) {
+                        _dx = 1;
+                    } else if (_txtNum.substr(0, 1) == _txtNum.substr(1, 1)) {
+                        _dx = 3;
+                    } else if (_txtNum.substr(0, 1) == _txtNum.substr(2, 1)) {
+                        _dx = 3;
+                    } else if (_txtNum.substr(1, 1) == _txtNum.substr(2, 1)) {
+                        _dx = 3;
+                    } else {
+                        _dx = 6;
+                    }
+                } else {
+                    if (_txtNum.substr(0, 1) != _txtNum.substr(1, 1)) {
+                        _dx = 2;
+                    } else{
+                        _dx = 1;
+                    }
+                }
+
+                //alert(_dx);
+                _total = (( TryParseInt(_Amount, 0)) * (_postValue) ) * _dx;
+                _TotalCommision = _total * _commision / 100 ;
+
+                _LDisplay =
+                              '        <tr class="trD" '
+                                + ' data-post="' + _Post + '"'
+                                + ' data-PlayAmount="' + _Amount  + '"'
+                                + ' data-number="' + _num + '"'
+                                + ' data-number1="' + _num1 + '"'
+                                + ' data-NumIncrease="' + _INum + '"'
+                                + ' data-PlayType="' + _PlayType + '"'
+                                + ' data-PostMultiplier="' + _postValue + '">' +
+                              '            <td>' + $("#txtNum").val() + '</td> ' +
+                              '            <td>*:</td> ' +
+                              '            <td>' + $("#txtAmount").val() + ' ៛ </td> ' +
+                              '        </tr> ' ;
+            }
+
+            //if(1){
+
+            //}
+
+
+
+            //alert(_LDisplay);
+            var _value = $(this).data("value");
+           // alert(_value);
+            if (_value == 'show') {
+                $("#tblTotal").hide();
+                if ($('#' + _Post).length !== 0) {
+                    //alert('#' + _Post)
+                    $('#' + _Post + " tbody").append(_LDisplay);
+                    //Your Code Here
+                } else {
+                    _LDisplay = '<div class="LDisplay" id= "' + $("#sp-session").val() +'">'+
+                               '<div class="dSession" onclick="dRemove(this);"  style="padding-right:20px; font:larger;">(' + $("#sp-session").val() + ') <span class="dPost" data-value="3">' + $("#txtPost").val() + '</span> <i class="glyphicon glyphicon-remove text-red dRemove" style="display:none;"></i></div> ' +
+                               '<table class="text-right pull-right sptb-display" id="' + _Post + '"> '
+                               + _LDisplay
+                   + '</table> </div>'
+                    //alert(_LDisplay);
+                    $("#fdisplay").append(_LDisplay);
+                }
+
+               // $("#spLoad").click();
+            } else if (_value == 'removeall') {
+
+            }
+
+        });
+
+        $(".fPlayType").click(function (event) {
+            //alert(_LDisplay);
+            var _value = $(this).data("value");
+            var _Num = $("#txtNum").val();
+           // alert(_value);
+            var _cPlayType = $("#txtPlayType").val();
+           var _incNum = 0;
+            if (_value == '2') {
+                // var _a = _Num.substr(0, 1);
+                var _a = _Num.substr(_Num.length - 1);
+                _incNum = 9;
+                //alert(_incNum);
+
+                var _b = 9
+                if (TryParseInt(_a, 0) != 0) {
+                  b = 9  + TryParseInt(_a, 0) - 1;
+                }
+
+                //alert(_b);
+                if (_b > 9) {
+                    _b = 9;
+                    _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                    $("#txtINum").val(_incNum);
+                } else {
+                    $("#txtINum").val(_b);
+                }
+
+                if (_b > 0) {
+                    var _c = _Num.substr(0, _Num.length -1);
+                    _Num = $("#txtNum1").val(_c + _b);
+                }
+
+                if (_value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").show();
+                    $("#p-sign").show();
+                    $("#OptType").val(2);
+                    $("#txtPlayType").val(_value);
+
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign").hide();
+                    $("#txtPlayType").val(1);
+
+                }
+
+            } else if (_value == '5') {
+                if (_value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign-x").show();
+                    var count = $("#txtNum").val().length;
+                  //  alert(count);
+                    if (count > 2) {
+                        $("span#p-sign-x").text("x3");
+                    } else {
+                        $("span#p-sign-x").text("x2");
+                    }
+                    $("#txtPlayType").val(_value);
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign").hide();
+                    $("#txtPlayType").val(1);
+                }
+            }
+            else if (_value == '6') {
+                if ( _value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign-x").show();
+                    $("#txtPlayType").val(_value);
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign").hide();
+                    $("#txtPlayType").val(1);
+                }
+            }
+
+            else if (_value == '1') {
+                $("#p-sign").hide();
+                $("#p-sign-x").hide();
+                $("#p-last-num").hide();
+                $("#txtPlayType").val(_value);
+            }
+
+        });
+
+        $("#txtINum").change(function () {
+
+            var _oNum = $("#OptType").val();
+
+            var _Num = $("#txtNum").val();
+
+            var _incNum = $("#txtINum").val();
+
+            var _txtPlayType = $("#txtPlayType").val();
+
+            var _Num2 = 0;
+            //alert(_oNum);
+            if (_txtPlayType == 5) {
+                var count = $("#txtNum").val().length;
+                //alert(count);
+                if (count > 2) {
+                    $("span#p-sign-x").text("x3");
+                } else {
+                    $("span#p-sign-x").text("x2");
+                }
+            }
+            if (_oNum == "2") {
+                //alert();
+                var _a = _Num.substr(0, 1);
+                var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+                if (_b > 9) {
+                    _b = 9;
+                    _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                    $("#txtINum").val(_incNum);
+                }
+
+                if (_b > 0) {
+                    var _c = _Num.substr(1, 3);
+
+                    _Num = $("#txtNum1").val(_b + _c);
+                }
+
+            } else if (_oNum == "3") {
+                if (_Num.length > 2) {
+
+                    var _a = _Num.substr(1, 1);
+
+                    var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+
+                    if (_b > 9) {
+
+                        _b = 9;
+                        _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                        $("#txtINum").val(_incNum);
+                    }
+
+                    if (_b > 0) {
+                        var _c = _Num.substr(0, 1);
+                        var _d = _Num.substr(2, 1);
+                        _Num = $("#txtNum1").val( _c + _b + _d);
+                    }
+
+                } else {
+
+                }
+            } else if (_oNum == "4") {
+                if (_Num.length > 2) {
+                    var _a = _Num.substr(2, 1);
+                    var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+                    var _c = _Num.substr(0, 2);
+                    if (_b > 9) {
+                        _b = 9;
+                        _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                        $("#txtINum").val(_incNum);
+                    }
+
+                    if (_b > 0) {
+                        _Num = $("#txtNum1").val(_c + _b);
+                    }
+
+                } else {
+                    var _a = _Num.substr(1, 1);
+                    var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+                    var _c = _Num.substr(0, 1);
+                    if (_b > 9) {
+                        _b = 9;
+                        _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                        $("#txtINum").val(_incNum);
+                    }
+
+                    if (_b > 0) {
+                        _Num = $("#txtNum1").val(_c + _b);
+                    }
+                }
+
+            }
+
+        });
+
+        $("#txtNum").change(function () {
+
+            var _oNum = $("#OptType").val();
+
+            var _Num = $("#txtNum").val();
+
+            var _incNum = $("#txtINum").val();
+
+            var _txtPlayType = $("#txtPlayType").val();
+
+            var _Num2 = 0;
+            //alert(_oNum);
+            if (_txtPlayType == 5) {
+                var count = $("#txtNum").val().length;
+               // alert(count);
+                if (count > 2) {
+                    $("span#p-sign-x").text("x3");
+                } else {
+                    $("span#p-sign-x").text("x2");
+                }
+            } else if(_txtPlayType == 2){
+                //alert();
+                // var _a = _Num.substr(0, 1);
+                var _a = _Num.substr(_Num.length - 1);
+                _incNum = 9;
+                //alert(_incNum);
+
+                var _b = 9 + TryParseInt(_a, 0) - 1;
+                //alert(_b);
+                if (_b > 9) {
+                    _b = 9;
+                    _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                    $("#txtINum").val(_incNum);
+                } else {
+                    $("#txtINum").val(_b);
+                }
+
+                if (_b > 0) {
+                    var _c = _Num.substr(0, _Num.length - 1);
+                    _Num = $("#txtNum1").val(_c + _b);
+                }
+
+            }
+
+            //if (_oNum == "2") {
+            //    //alert();
+            //    var _a = _Num.substr(0, 1);
+            //    var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+            //    if (_b > 9) {
+            //        _b = 9;
+            //        _incNum = (9 - TryParseInt(_a, 0)) - 1;
+            //        $("#txtINum").val(_incNum);
+            //    }
+
+            //    if (_b > 0) {
+            //        var _c = _Num.substr(1, 3);
+
+            //        _Num = $("#txtNum1").val(_b + _c);
+            //    }
+
+            //} else if (_oNum == "3") {
+                //if (_Num.length > 2) {
+
+                //    var _a = _Num.substr(1, 1);
+
+                //    var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+
+                //    if (_b > 9) {
+
+                //        _b = 9;
+                //        _incNum = (9 - TryParseInt(_a, 0)) - 1;
+                //        $("#txtINum").val(_incNum);
+                //    }
+
+                //    if (_b > 0) {
+                //        var _c = _Num.substr(0, 1);
+                //        var _d = _Num.substr(2, 1);
+                //        _Num = $("#txtNum1").val(_c + _b + _d);
+                //    }
+
+                //} else {
+
+                //}
+            //} else if (_oNum == "4") {
+            //    if (_Num.length > 2) {
+            //        var _a = _Num.substr(2, 1);
+            //        var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+            //        var _c = _Num.substr(0, 2);
+            //        if (_b > 9) {
+            //            _b = 9;
+            //            _incNum = (9 - TryParseInt(_a, 0)) - 1;
+            //            $("#txtINum").val(_incNum);
+            //        }
+
+            //        if (_b > 0) {
+            //            _Num = $("#txtNum1").val(_c + _b);
+            //        }
+
+            //    } else {
+            //        var _a = _Num.substr(1, 1);
+            //        var _b = (TryParseInt(_incNum, 0) + TryParseInt(_a, 0)) - 1;
+            //        var _c = _Num.substr(0, 1);
+            //        if (_b > 9) {
+            //            _b = 9;
+            //            _incNum = (9 - TryParseInt(_a, 0)) - 1;
+            //            $("#txtINum").val(_incNum);
+            //        }
+
+            //        if (_b > 0) {
+            //            _Num = $("#txtNum1").val(_c + _b);
+            //        }
+            //    }
+
+            //}
+
+        });
+
+        $(".key").click(function (event) {
+            event.preventDefault();
+            var _value = $(this).data("value");
+             //alert(_value);
+            // var olval = $('.sp-input').val() + _value;
+            //_value = valitValueMaxNum(_value,1,999)
+            $('.spselected').val($('.spselected').val() + _value);
+
+            var spvalue = TryParseInt($('.spselected').val(),00);
+
+            if (spvalue > 999) {
+                $('.spselected').val("");
+            }
+            var _id = $('.spselected').attr("id");
+            //alert($('.spselected').attr("id"));
+            // $('.spselected').val($('.spselected').val() + _value);
+            if (_id == "txtNum") {
+                $("#txtNum").change();
+            }
+
+            var _id = $('.spselected').attr('id');
+            if (_id == 'sp-session') {
+                $("#sp-session").change();
+                loanPlay();
+            }
+
+        });
+
+        $(".KeyEnter").click(function (event) {
+
+            var _spselected = $(".spselected");
+            var _spselectedid = _spselected.attr('id');
+            var _PlayType = $("#txtPlayType").val();
+            //alert(_spselectedid);
+
+            var _Num = $("#txtNum").val();
+            var _Num1 = $("#txtNum1").val();
+            var _Amount = $("#txtAmount").val();
+
+
+            if (_PlayType != "2") {
+                if (_Num == '') {
+                    // alert("សូមជ្រើសរើសលេខចាក់!..");
+                    $('.sp-input').removeClass('spselected');
+                    $("#txtNum").addClass("spselected");
+
+                    return;
+                }
+                if (_Amount == '') {
+                    //alert("សូមជ្រើសចំនួនប្រាក់!..");
+                    $('.sp-input').removeClass('spselected');
+                    $("#txtAmount").addClass("spselected");
+                    return;
+                }
+
+                if (_spselectedid == 'txtNum') {
+                    $('.sp-input').removeClass('spselected');
+                    $("#txtAmount").addClass("spselected");
+                } else {
+                    $(".funPlay").click();
+                    $('.sp-input').removeClass('spselected');
+                    $("#txtNum").val("");
+                    $("#txtNum").addClass("spselected");
+                }
+            } else {
+
+
+                if (_spselectedid == 'txtNum') {
+                    $('.sp-input').removeClass('spselected');
+                    $("#txtNum1").addClass("spselected");
+                    //$("#txtAmount").addClass("spselected");
+                } else if (_spselectedid == 'txtNum1') {
+                    //$(".funPlay").click();
+                    $('.sp-input').removeClass('spselected');
+                   // $("#txtNum").val("");
+                    $("#txtAmount").addClass("spselected");
+                } else if (_spselectedid == 'txtAmount') {
+                    if (_Num == '') {
+                        // alert("សូមជ្រើសរើសលេខចាក់!..");
+                        $('.sp-input').removeClass('spselected');
+                        $("#txtNum").addClass("spselected");
+
+                        return;
+                    }
+                    if (_Num1 == '') {
+                        // alert("សូមជ្រើសរើសលេខចាក់!..");
+                        $('.sp-input').removeClass('spselected');
+                        $("#txtNum1").addClass("spselected");
+                        return;
+                    }
+                    if (_Amount == '') {
+                        //alert("សូមជ្រើសចំនួនប្រាក់!..");
+                        $('.sp-input').removeClass('spselected');
+                        $("#txtAmount").addClass("spselected");
+                        return;
+                    }
+
+                    $(".funPlay").click();
+                    $('.sp-input').removeClass('spselected');
+                    $("#txtNum").val("");
+                    $("#txtNum1").val("");
+                    $("#txtNum").addClass("spselected");
+                }
+            }
+
+
+        });
+
+        $("#OptType").change(function (event) {
+            $("#txtINum").change();
+
+            //alert(_LDisplay);
+            var _value = $("#OptType").val();
+            //alert(_value);
+            var _cPlayType = $("#txtPlayType").val();
+
+            if (_value == '2' || _value == '3' || _value == '4') {
+                if (_value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").show();
+                    $("#p-sign").show();
+                    $("#txtPlayType").val(_value);
+
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").show();
+                    $("#p-sign").show();
+                    $("#txtPlayType").val(_value);
+                }
+
+            } else if (_value == '5') {
+                if (_value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").show();
+                    $("#p-sign-x").show();
+
+                    $("#txtPlayType").val(_value);
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign").hide();
+                    $("#txtPlayType").val(1);
+                }
+            }
+            else if (_value == '6') {
+                if (_value != _cPlayType) {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign-x").show();
+
+                    $("#txtPlayType").val(_value);
+                } else {
+                    $("#p-sign").hide();
+                    $("#p-sign-x").hide();
+                    $("#p-last-num").hide();
+                    $("#p-sign").hide();
+                    $("#txtPlayType").val(1);
+                }
+            }
+
+            else if (_value == '1') {
+                $("#p-sign").hide();
+                $("#p-sign-x").hide();
+                $("#p-last-num").hide();
+                $("#txtPlayType").val(_value);
+            }
+            if ($("#OptType").val() == "1") {
+
+            }
+
+        });
+
+        $(".funcR").click(function (event) {
+            event.preventDefault();
+            var _value = $(this).data("value");
+            //alert(_value);
+            if (_value == 'remove') {
+                var olval = $('.spselected').val();
+                var value = olval.substring(0, olval.length - 1);
+                $('.spselected').val(value);
+                var _id = $('.spselected').attr('id');
+                if (_id == 'txtNum') {
+                    $("#txtNum").change();
+                }
+
+            } else if (_value == 'removeall') {
+                //     var olval = $('.spselected').val();
+                //var value = olval.substring(0, olval.length - 1);
+                $('.spselected').val('');
+                var _id = $('.spselected').attr('id');
+                if (_id == 'txtNum') {
+                    $("#txtNum").change();
+                } else if (_id == 'txtNum') {
+
+                }
+
+            } else if (_value == 'newSession') {
+                var _val = $("#sp-session").val();
+                $("#sp-session").val(parseInt(_val) + 1);
+                loanPlay();
+
+            }
+        });
+
+        //Shift
+        $(".kShift").click(function (event) {
+            event.preventDefault();
+            var _value = $(this).data("value");
+            var _txt = $(this).data("text");
+            if (_value != "OK") {
+                //$("#btnShift").val(_value);
+                $('#btnShift').data('value', _value);
+                $('#shift-text').text( _txt);
+                if (_value != "1") {
+                    $('#btnPost').attr("data-target", "#ePost");
+                } else {
+                    $('#btnPost').attr("data-target", "#mPost");
+                }
+                $("#mShift").modal("hide");
+                loanPlay();
+            } else {
+                $("#mShift").modal("hide");
+            }
+
+        });
+        // al
+        $(".kpost").click(function (event) {
+            event.preventDefault();
+            var _value = $(this).data("value");
+            var _multiplier = $(this).data('multiplier');
+            //alert(_value);
+            if (_value != "OK") {
+                $("#txtPost").val(_value);
+                // alert(_multiplier);
+                $("#txtPost").data("multiplier", _multiplier);
+                $('#txtPost').attr("data-multiplier", _multiplier);
+                $("#mPost").modal("hide");
+                $("#ePost").modal("hide");
+            } else {
+
+                $("#mPost").modal("hide");
+                $("#ePost").modal("hide");
+            }
+            // alert(_value);
+        });
+
+        $("#spPlay").click(function (event) {
+            event.preventDefault();
+            //alert("#spPlay");
+            i = 1;
+            $("tr.trD").each(function (ix, element) {
+                // Do your processing.
+                //var _postValue = $(this).data("post");
+                //alert("#spPlay" + i + _postValue);
+                //i += 1;
+                var d = new Date();
+                var strDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+
+                $("#sp-date").val(strDate);
+                // alert("btnPlay");
+                //// Create Org
+                //$('#e-btnEditAdd').click(function (e) {
+                //    e.preventDefault();
+                //    $('#e-OrgAddress #OrgSMS div.alert').hide();
+                //    var sms = "";
+                //    var error = false;
+
+                var validate = true;
+                if (validate == false) {
+                    alert('false');
+                    return;
+                } else {
+
+                    var error_free = true;
+                    var url = "/Front/_save";
+                    //alert(url);
+                    if (!error_free) {
+                        //event.preventDefault();
+                    }
+                    else {
+                        //alert('No errors: Form will be submitted');
+                        //event.preventDefault();
+
+                        var HORGADDID = $('#HORGADDID').val();
+                        _Date = $("#sp-date").val();
+                        Shift = $("#btnShift").data("value");
+                        var _post = $(this).data("post");
+                        var _number = $(this).data("number");
+                        var _number1 = $(this).data("number1");
+                        var Session = $("#sp-session").val();
+                        var _NumIncrease = $(this).data("numincrease");
+                        var _PlayType = $(this).data("playtype");
+                        var _PostMultiplier = $(this).data("postmultiplier");
+                        var _PlayAmount = $(this).data("playamount");
+                        var _PlayTypeMultiplier = 1;
+                        if (_PlayType != 2) {
+                            _NumIncrease = 1;
+                            _number1 = '';
+                        } else if (_PlayType == 2) {
+
+                            var oVal = _number.toString();
+                            var oVal1 = _number1.toString();
+                            if (oVal.length > 2) {
+                                var n1 = oVal.substr(0, 1);
+                                var n2 = oVal.substr(1, 1);
+                                var n3 = oVal.substr(2, 1);
+
+                                var in1 = oVal1.substr(0, 1);
+                                var in2 = oVal1.substr(1, 1);
+                                var in3 = oVal1.substr(2, 1);
+
+                                if(n1 != in1 && (n2 == in2 && n3 == in3 )){
+                                    if (n1 < in1) {
+                                        _NumIncrease = (parseInt(in1, 0) - parseInt(n1, 0))+1 ;
+                                    } else {
+                                        _NumIncrease = (parseInt(n1, 0) - parseInt(in1, 0))+1;
+                                    }
+                                } else if (n2 != in2 && (n1 == in1 && n3 == in3)) {
+                                    if (n2 < in2) {
+                                        _NumIncrease = (parseInt(in2, 0) - parseInt(n2, 0)) + 1;
+                                    } else {
+                                        _NumIncrease = (parseInt(n2, 0) - parseInt(in2, 0)) + 1;
+                                    }
+                                } else if (n3 != in3 && (n1 == in1 && n2 == in2)) {
+                                    if (n3 < in3) {
+                                        _NumIncrease = (parseInt(in3, 0) - parseInt(n3, 0)) + 1;
+                                    } else {
+                                        _NumIncrease = (parseInt(n3, 0) - parseInt(in3, 0)) + 1;
+                                    }
+                                } else if((n1 == in1) && (n2 == in2 && n3 == in3 )) {
+                                    _NumIncrease = 1;
+                                } else {
+                                    if (_number < _number1) {
+                                        _NumIncrease = (parseInt(_number1, 0) - parseInt(_number, 0)) + 1;
+                                    } else {
+                                        _NumIncrease = (parseInt(_number, 0) - parseInt(_number1, 0)) + 1;
+                                    }
+                                }
+                            } else {
+                                var n1 = oVal.substr(0, 1);
+                                var n2 = oVal.substr(1, 1);
+                                //var n3 = oVal.substr(2, 1);
+
+                                var in1 = oVal1.substr(0, 1);
+                                var in2 = oVal1.substr(1, 1);
+                                //var in3 = oVal.substr(2, 1);
+                               // alert(in1 + ':' + in1 + '-' + n2 + ':' + in2 );
+                                if (n1 != in1 && n2 == in2) {
+                                    if (n1 < in1) {
+                                        _NumIncrease = (parseInt(in1, 0) - parseInt(n1, 0)) + 1;
+                                    } else {
+                                        _NumIncrease = (parseInt(n1, 0) - parseInt(in1, 0)) + 1;
+                                    }
+                                } else if (n2 != in2 && n1 == in1) {
+                                    if (n2 < in2) {
+                                        _NumIncrease = (parseInt(in2, 0) - parseInt(n2, 0)) + 1;
+                                    } else {
+                                        _NumIncrease = (parseInt(n2, 0) - parseInt(in2, 0)) + 1;
+                                    }
+                                }  else if ((n1 == in1) && n2 == in2) {
+                                    _NumIncrease = 1;
+                                } else {
+                                    if (_number < _number1) {
+                                        _NumIncrease = (parseInt(_number1, 0) - parseInt(_number, 0)) + 1;
+                                    } else {
+                                        _NumIncrease = (parseInt(_number, 0) - parseInt(_number1, 0)) + 1;
+                                    }
+                                }
+                            }
+
+                        }
+                        if (_PlayType == 5) {
+                            var oVal = _number.toString()
+                            if (oVal.length > 2) {
+                                var n1 = oVal.substr(0, 1);
+                                var n2 = oVal.substr(1, 1);
+                                var n3 = oVal.substr(2, 1);
+
+                              //  alert(n1 + ':' + n2 + ':' + n3)
+
+                                if ((n1 != n2) && (n1 != n3) && (n2 != n3)) {
+                                    _PlayTypeMultiplier = 6;
+                                } else if ((n1 == n2) && (n1 == n3)) {
+                                    _PlayTypeMultiplier = 1;
+                                } else {
+                                    _PlayTypeMultiplier = 3;
+                                }
+                            } else  {
+                                var n1 = oVal.substr(0, 1);
+                                var n2 = oVal.substr(1, 2);
+
+                               // alert(n1 + n2 )
+
+                                if (n1 != n2) {
+                                    _PlayTypeMultiplier = 2;
+                                }  else {
+                                    _PlayTypeMultiplier = 1;
+                                }
+                            }
+
+
+                        }
+
+
+                        @*command.Parameters.Add(new SqlParameter("@PlayDate", _m["PlayDate"]));
+                        command.Parameters.Add(new SqlParameter("@Shift", _m["Shift"]));
+                        command.Parameters.Add(new SqlParameter("@CustomerID", 1));
+                        command.Parameters.Add(new SqlParameter("@CreaterID", 1));
+                        command.Parameters.Add(new SqlParameter("@Post", _m["Post"]));
+                        command.Parameters.Add(new SqlParameter("@Number", _m["Number"]));
+                        command.Parameters.Add(new SqlParameter("@Number1", _m["Number1"]));
+                        command.Parameters.Add(new SqlParameter("@PostMultiplier", _m["Multiplier"]));
+                        command.Parameters.Add(new SqlParameter("@PlayType", _m["PlayType"]));
+                        command.Parameters.Add(new SqlParameter("@PlayAmount", _m["PlayAmount"]));
+                        command.Parameters.Add(new SqlParameter("@Status", 1));*@
+                        data = {
+                            "PlayDate": _Date
+                            , "Shift": Shift
+                            , "Session": Session
+                            , "Number": _number
+                            , "Number1": _number1
+                            , "NumIncrease": _NumIncrease
+                            , "Post": _post
+                            , "PlayType": _PlayType
+                            , "Multiplier": _PostMultiplier
+                            , "PlayTypeMultiplier": _PlayTypeMultiplier
+                            , "PlayAmount":  _PlayAmount
+                        }
+
+                        $.post(url, data, function (data) {
+                            //  alert(data);
+                            if (data.Status == "OK") {
+                                $("#fdisplay").html("");
+                                $("#spLoad").click();
+                            } else {
+                                alert(data.Result);
+                                //$('#dialogOrgMember #dialogContent').scrollTop(0);
+                            }
+                        });
+
+
+                    }
+                }
+            });
+        });
+
+        $('.sp-input').click(function () {
+            $('.sp-input').removeClass('spselected');
+            $(this).addClass('spselected');
+        });
+
+       // });
+        </script>
+    </div>
+
+}
