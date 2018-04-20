@@ -53,10 +53,10 @@ namespace LTMS.Controllers
 
             DataTable dtShift = SpBinding.GetTableStore("sp_checkShift", "checkShift", sqlparams);
 
-            if (dtShift==null || dtShift.Rows.Count <= 0)
-            {
-                return Json(new { Status = "NO", Result = "ពេលបិទហើយមិនអាចចាក់បានទេ!..", Message = "ពេលបិទហើយមិនអាចចាក់បានទេ!.." }, "application/json", JsonRequestBehavior.AllowGet);
-            }
+            //if (dtShift==null || dtShift.Rows.Count <= 0)
+            //{
+            //    return Json(new { Status = "NO", Result = "ពេលបិទហើយមិនអាចចាក់បានទេ!..", Message = "ពេលបិទហើយមិនអាចចាក់បានទេ!.." }, "application/json", JsonRequestBehavior.AllowGet);
+            //}
 
             using (SqlConnection connection = new SqlConnection(connect))
             using (SqlCommand command = new SqlCommand("", connection))

@@ -187,6 +187,7 @@
     <Compile Include="Controllers\AdminLteController.cs" />
     <Compile Include="Controllers\AgenciesController.cs" />
     <Compile Include="Controllers\CommissionsController.cs" />
+    <Compile Include="Controllers\PlayController.cs" />
     <Compile Include="Controllers\FrontController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -1060,6 +1061,8 @@
     <Content Include="Views\Shifts\Viewhh.cshtml" />
     <Content Include="Views\Manage\ATranList.cshtml" />
     <Content Include="Views\Manage\ShowPlay.cshtml" />
+    <Content Include="Views\Play\Clients.cshtml" />
+    <Content Include="Views\Play\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
