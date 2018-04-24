@@ -1435,14 +1435,6 @@ namespace LTMS.Controllers
         [HttpPost]
         public ActionResult _LoadPlay(FormCollection _m)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.tblPlays.Add(_m);
-            //    db.SaveChanges();
-            //    return Json(new { Result = "OK", Message = "successfully!" }, "application/json", JsonRequestBehavior.AllowGet);
-            //}
-            //return Json(new { Result = "NO", Message = "Fail!" }, "application/json", JsonRequestBehavior.AllowGet);
-
             using (SqlConnection connection = new SqlConnection(connect))
             using (SqlCommand command = new SqlCommand("", connection))
             {
@@ -1487,9 +1479,12 @@ namespace LTMS.Controllers
                     var _totalAfterCommission = 0;
                     var _AgcCommission = 0;
                     var _MaxSession = 1;
-
+                    var _GroupPOST = "";
+                    var _totalRecord = dt.Rows.Count ;
+                    var _i = 0;
                     foreach (DataRow row in dt.Rows)
                     {
+                        _i = _i+ 1;
                         var dict = new Dictionary<string, object>();
 
                         _total += int.Parse(row["Total"].ToString());
@@ -1501,6 +1496,56 @@ namespace LTMS.Controllers
                             dict[col.ColumnName] = (Convert.ToString(row[col]));
                         }
 
+                        if (_i==1 && _totalRecord>1)
+                        {
+                            dict["BTR"] = "begin";
+                            dict["ETR"] = "";
+                        }
+                        else if(_i > 1 && _i < _totalRecord)
+                        {
+                            if(_GroupPOST != Convert.ToString(row["GroupPOST"]))
+                            {
+                                dict["BTR"] = "endbegin";
+                                dict["ETR"] = "";
+                            }
+                            else
+                            {
+
+                                dict["BTR"] = "";
+                                dict["ETR"] = "";
+                            }
+                        }
+                        else if (_i  == _totalRecord)
+                        {
+                            if (_totalRecord == 1)
+                            {
+                                if (_GroupPOST != Convert.ToString(row["GroupPOST"]))
+                                {
+                                    dict["BTR"] = "begin";
+                                    dict["ETR"] = "end";
+                                }
+                                else
+                                {
+                                    dict["BTR"] = "";
+                                    dict["ETR"] = "end";
+                                }
+                            }
+                            else
+                            {
+                                if (_GroupPOST != Convert.ToString(row["GroupPOST"]))
+                                {
+                                    dict["BTR"] = "endbegin";
+                                    dict["ETR"] = "end";
+                                }
+                                else
+                                {
+                                    dict["BTR"] = "";
+                                    dict["ETR"] = "end";
+                                }
+                            }
+                        }
+                        _GroupPOST = Convert.ToString(row["GroupPOST"]);
+                         
                         list.Add(dict);
                     }
                     var GetAfterComm = 100 - _AgcCommission;

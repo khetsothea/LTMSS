@@ -105,6 +105,7 @@
             var id = 3;
             data = JSON.stringify({ id: null });
             dpObject = $("#sp-agency");
+            dpObject.html("");
           //  fechOption(dpObject, url, null, "Agencies", "AgencyID", "AgencyName", "AgencyID", "AgencyID", "ASC", '@Request.QueryString["id"]', '<option value="0"> --ភ្នាក់ងារ-- </option>');
             fechOptionSelected(dpObject, url, null, "Agencies", "AgencyID", "AgencyName", "AgencyID", "AgencyID", "ASC", '@Request.QueryString["id"]', '<option value="0"> --ភ្នាក់ងារ-- </option>');
             if (_id != '') {
