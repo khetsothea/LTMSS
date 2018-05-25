@@ -1063,6 +1063,7 @@
     <Content Include="Views\Manage\ShowPlay.cshtml" />
     <Content Include="Views\Play\Clients.cshtml" />
     <Content Include="Views\Play\Index.cshtml" />
+    <Content Include="Views\Manage\ShowPlay - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

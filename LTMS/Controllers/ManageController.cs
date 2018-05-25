@@ -1503,13 +1503,7 @@ namespace LTMS.Controllers
         [HttpPost]
         public ActionResult _ShowPlay(FormCollection _m)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.tblPlays.Add(_m);
-            //    db.SaveChanges();
-            //    return Json(new { Result = "OK", Message = "successfully!" }, "application/json", JsonRequestBehavior.AllowGet);
-            //}
-            //return Json(new { Result = "NO", Message = "Fail!" }, "application/json", JsonRequestBehavior.AllowGet);
+          
 
             using (SqlConnection connection = new SqlConnection(connect))
             using (SqlCommand command = new SqlCommand("", connection))
@@ -1575,11 +1569,223 @@ namespace LTMS.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        public ActionResult _ShowPlayV1(FormCollection _m)
+        {
+            using (SqlConnection connection = new SqlConnection(connect))
+            using (SqlCommand command = new SqlCommand("", connection))
+            {
+                try
+                {
+                    command.CommandText = "sp_ShowPlayedV1";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Connection = connection;
+
+                    var PlayDate = _m["PlayDate"];
+                    var Shift = _m["Shift"];
+                    var CustomerID = _m["CustomerID"];
+
+                    command.Parameters.Add(new SqlParameter("@PlayDate", _m["PlayDate"]));
+                    command.Parameters.Add(new SqlParameter("@Shift", _m["Shift"].ToString()));
+                    command.Parameters.Add(new SqlParameter("@Session", _m["Session"].ToString()));
+                    command.Parameters.Add(new SqlParameter("@CustomerID", CustomerID));
+
+                    ////command.Parameters.Add(new SqlParameter("@Date", 1));
+                    if (connection.State != ConnectionState.Open)
+                    {
+                        connection.Open();
+                    }
+                    
+                    // var i = command.ExecuteNonQuery();
+                    SqlDataAdapter sda = new SqlDataAdapter(command);
+                    DataTable dt = new DataTable();
+
+                    int rowsAffected = sda.Fill(dt);
+
+                    if (connection.State != ConnectionState.Closed)
+                    {
+                        connection.Close();
+                    }
+
+                    string jsonString = string.Empty;
+                    jsonString = JsonConvert.SerializeObject(dt);
+                    List<DataRow> listtablename = dt.AsEnumerable().ToList();
+
+                    var list = new List<Dictionary<string, object>>();
+
+                    var _total = 0;
+                    var _totalAfterCommission = 0;
+                    var _AgcCommission = 0;
+                    var _MaxSession = 1;
+                    var _session = 0;
+                    var _GroupPOST = "";
+
+                    var _totalRecord = dt.Rows.Count;
+                    var _i = 0;
+                    var _postTotal = 0.0;
+
+                    var _TR = "";
+                    var _PreTR = "";
+                    var _CurTR = "";
+
+                    var _sequen_Session = 0;
+
+                    var _PrePost = "";
+                    
+                    var _CurPost = "";
+                    var _CurGroupPost = "";
+                    var _PreGroupPost = "";
+                    var _CurSession = 0;
+                    var _PreSession = 0;
+
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        _i += 1;
+
+                        _CurGroupPost= row["GroupPost"].ToString();
+
+                        _CurSession=int.Parse(row["Session"].ToString());
+                        var _MinSessionPOSTID = int.Parse(row["MinSessionPOSTID"].ToString());
+                        var _MaxSessionPOSTID = int.Parse(row["MaxSessionPOSTID"].ToString());
+                        var _PlayID= int.Parse(row["PlayID"].ToString());
+                        var _Post = row["Post"].ToString();
+                        _CurTR = "";
+
+                        var _OPENPOST = "<table><tbody><tr><td colspan=\"3\" style = \"font-size: 15px; text-align: right; \" >" + _Post + "(" + _CurSession + ") </td></tr>";
+                        var _ENDPOST = "				  </tbody>"
+                                        + "				  <tfoot style=\"border: 1px solid; \">"
+                                          + "					  <tr>"
+                                          + "						  <th colspan=\"3\">"
+                                          + "							  D2:" + row["SumGroupPOSTAmountD2"].ToString()
+                                          + "						  </th>"
+                                          + "					  </tr>"
+                                          + "					  <tr>"
+                                          + "						  <th colspan=\"3\">"
+                                          + "							  D3:" + row["SumGroupPOSTAmountD3"].ToString()
+                                          + "						  </th>"
+                                          + "					  </tr>"
+                                          + "				  </tfoot>"
+                                          + "			  </table>";
+
+                        var _OPENSESSION = "<td style=\" vertical-align: top; \">"
+                                            + "  <table class=\"tbsession\">"
+                                            + "	  <tbody>"
+                                            + "	    <tr>"
+                                            + "		  <td>";
+
+
+                        var _ENDSESSION = "		  </td>"
+                                        + "	    </tr>"
+                                        + "	  </tbody>"
+                                        + "  </table>"
+                                        + "</td>";
+
+                        _CurSession = int.Parse(row["Session"].ToString());
+
+                        if (_PlayID  == _MinSessionPOSTID)
+                        {
+                            _TR += _OPENSESSION ;
+                        }
+
+
+                        var _MaxGroupPOSTID= int.Parse(row["MaxGroupPOSTID"].ToString());
+                        var _MinGroupPOSTID = int.Parse(row["MinGroupPOSTID"].ToString());
+
+                        if (_PlayID == _MinGroupPOSTID)
+                        {
+                            //_TR = "<tr><td>" + row["GroupPost"].ToString() + "</td><td>:</td><td>" + row["GroupPost"].ToString() + "</td></tr>";
+                            _TR += _OPENPOST;
+                        }
+
+                        var _PlayType = int.Parse(row["PlayType"].ToString());
+                        if (_PlayType == 1)
+                        {
+                            _TR += "<tr><td>" + row["Number"].ToString() + "</td><td>:</td><td>" + row["PlayAmount"].ToString() + "</td></tr>";
+                        }
+                        else if (_PlayType == 5)
+                        {
+                            _TR += "<tr><td>" + row["Number"].ToString() + "</td><td>*:</td><td>" + row["PlayAmount"].ToString() + "</td></tr>";
+                        }
+                        else
+                        {
+                            _TR += "<tr><td>" + row["Number"].ToString() + "</td><td>:</td><td>" + row["PlayAmount"].ToString() + "</td></tr>";
+                            _TR += "<tr><td></td><td><span><i class=\" fa fa-long-arrow-down \"></i></span>(" + row["NumberCount"].ToString() + "):</td><td></td></tr>";
+                            _TR += "<tr><td>" + row["Number1"].ToString() + "</td><td>:</td><td>" + row["PlayAmount"].ToString() + "</td></tr>";
+                        }
+                        //<span><i class="fa fa-long-arrow-down"></i></span>(NumberCount)
+                        if (_PlayID == _MaxGroupPOSTID)
+                        {
+                          
+                            _TR += _ENDPOST;
+                        }
+
+                        
+                        //End Session
+                        if (_PlayID == _MaxSessionPOSTID)
+                        {
+                            _TR += _ENDSESSION;
+                        }
+
+                        _PreTR = _CurTR;
+                        _PreSession = _CurSession;
+
+                        //BEGINSESSION
+
+                    }
+
+                 
+                    return Json(new { Status="OK", Result = _TR}, "application/json", JsonRequestBehavior.AllowGet);
+                    _TR = "<td>"
+                         + "  <table class=\"tbsession\">"
+                         + "	  <tbody>"
+                         + "	  <tr>"
+                         + "		  <td>"
+                         + "			  <table class=\"tbpost\">"
+                         + "				  <tbody><tr>"
+                         + "					  <th colspan=\"3\">"
+                         + "						  A(1)"
+                         + "					  </th>"
+                         + "				  </tr>"
+                         + "				  <tr><td>333</td><td>:</td><td>100</td></tr>"
+                         + "				  <tr><td>333</td><td>:</td><td>100</td></tr>"
+                         + "				  </tbody><tfoot style=\"border: 1px solid; \">"
+                         + "					  <tr>"
+                         + "						  <th colspan=\"3\">"
+                         + "							  D2:100"
+                         + "						  </th>"
+                         + "					  </tr>"
+                         + "					  <tr>"
+                         + "						  <th colspan=\"3\">"
+                         + "							  D3:100"
+                         + "						  </th>"
+                         + "					  </tr>"
+                         + "				  </tfoot>"
+                         + "			  </table>"
+                         + "		  </td>"
+                         + "	  </tr>"
+                         + "  </tbody>"
+                         + "  </table>"
+                         + "</td>";
+
+                    //Json(new { Status = "OK", Result = list, Total = _total * 100, TotalAfterComm = TotalAfterCommission, AgcCommission = GetAfterComm, MaxSession = _MaxSession }, "application/json", JsonRequestBehavior.AllowGet);
+                }
+
+                catch (Exception ex)
+                {
+                    return Json(new { Status = "NO", Message = ex.Message.ToString() }, "application/json", JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
         public ActionResult _LoadResult(FormCollection _m)
         {
+
             //var query = "";
             //var Shift = _m["Shift"];
             //var RDate = _m["RDate"];
+
             DataTable dt = new DataTable();
             string jsonString = string.Empty;
             jsonString = JsonConvert.SerializeObject(dt);
