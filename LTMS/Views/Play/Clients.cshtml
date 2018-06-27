@@ -8,7 +8,7 @@
     <!--top-->
     <div class="row​ col-md-12 btn-group" style="padding:3px;">
         <a href="/Manage/Document" class="btn-cus-top sp-btn hidden-xs" style="width:10%">បញ្ជី</a>
-        <button class="btn-cus-top sp-btn " style="width:10%" id="btnShift" data-value="1" data-toggle="modal" data-target="#mShift"><span id="shift-text" data-shtext>ល្ងាច</span></button>
+        <button class="btn-cus-top sp-btn " style="width:10%" id="btnShift" data-value="1"><span id="shift-text" data-shtext>ល្ងាច</span></button>
         <a href="javascript:void(0)" id="btn-before"><i class="fa fa-chevron-circle-left custom" aria-hidden="true" style="margin:0px; font-size:8pt;"></i></a>
         <input type="text" name="sp-date" id="sp-date" value="2017-02-08" class="" style="height: 35px;width: 64px;font-size: 8pt;height: 35px;width: 64px;font-size: 8pt;" />
         <a href="javascript:void(0)" id="btn-next"><i class="fa fa-chevron-circle-right custom" style="margin:0px; font-size: 8pt;" aria-hidden="true"></i></a>
@@ -143,7 +143,7 @@
 </div>
 
 @*Modal*@
-<div class="modal fade" id="mShift" role="dialog">
+s<div class="modal fade" id="mShift" role="dialog">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
@@ -152,13 +152,11 @@
             <div class="modal-body">
                 <div class="container-fluid text-center">
                     <div class="row">
-                        <button class="btn sp-btn btn-default col col-xs-12 kShift" data-value="1" data-text="ល្ងាច">ល្ងាច</button>
+                        <div class="btn btn-default col col-xs-12 kShift" data-value="1" data-text="ល្ងាច">ល្ងាច</div>
+                        <div class="btn btn-default col col-xs-12 kShift" data-value="2" data-text="យប់">យប់</div>
                     </div>
                     <div class="row">
-                        <button class="btn sp-btn btn-default col col-xs-12 kShift" data-value="2" data-text="យប់">យប់</button>
-                    </div>
-                    <div class="row">
-                        <button class="btn btn-default col col-xs-12 kShift" data-value="OK"><i class="fa fa-arrow-left"></i></button>
+                        <div class="btn btn-default col col-xs-12 kShift" data-value="OK"><i class="fa fa-arrow-left"></i></div>
                     </div>
                 </div>
             </div>
@@ -169,7 +167,6 @@
 
     </div>
 </div>
-
 <div class="modal fade" id="ePost" role="dialog">
     <div class="modal-dialog modal-md" style="margin-top:70px;">
         <div class="modal-content">
@@ -301,6 +298,7 @@
         //    if (input.value < 0) input.value = 0;
         //    if (input.value > ) input.value = 100;
             //}
+            var isNewEnter = false;
             var isCAmount = true;
         function dRemove(event) {
             var id = event.closest('.LDisplay'); //("..LDisplay");
@@ -1427,9 +1425,9 @@
         $(".key").click(function (event) {
 
             var _id = $('.spselected').attr("id");
-            if (_id == "txtAmount" && isCAmount==true) {
+            if (_id == "txtAmount" && isNewEnter == true ) {
                 $("#txtAmount").val('');
-                isCAmount = false;
+                isNewEnter = false;
             }
 
             var _value = $(this).data("value");
@@ -1456,6 +1454,7 @@
         });
 
         $(".KeyEnter").click(function (event) {
+
             event.preventDefault();
 
             if ($("#sp-agency").val() == 0) {
@@ -1486,13 +1485,16 @@
                 if (_Amount == '') {
                     //alert("សូមជ្រើសចំនួនប្រាក់!..");
                     $('.sp-input').removeClass('spselected');
+                    
                     $("#txtAmount").addClass("spselected");
+                    isNewEnter = true;
                     return;
                 }
 
                 if (_spselectedid == 'txtNum') {
                     $('.sp-input').removeClass('spselected');
                     $("#txtAmount").addClass("spselected");
+                    isNewEnter = true;
                 } else {
                     //$(".funPlay").click();
                     Shift = $("#btnShift").data("value");
@@ -1513,7 +1515,7 @@
                         //  alert(data);
                         if (data.Status == "OK") {
                             $("#fdisplay").html("");
-                            $("#txtAmount").val("");
+                            //$("#txtAmount").val("");
                             //$("#spLoad").click();
                             loanPlay1();
                             $('#fdisplay').scrollTop($('#fdisplay').height())
@@ -1536,14 +1538,15 @@
                 } else if (_spselectedid == 'txtNum1') {
                     //
                     $('.sp-input').removeClass('spselected');
-                   // $("#txtNum").val("");
+                    // $("#txtNum").val("");
+                    isNewEnter = true;
                     $("#txtAmount").addClass("spselected");
+                    isNewEnter = true;
                 } else if (_spselectedid == 'txtAmount') {
                     if (_Num == '') {
                         // alert("សូមជ្រើសរើសលេខចាក់!..");
                         $('.sp-input').removeClass('spselected');
                         $("#txtNum").addClass("spselected");
-
                         return;
                     }
                     if (_Num1 == '') {
@@ -1555,7 +1558,9 @@
                     if (_Amount == '') {
                         //alert("សូមជ្រើសចំនួនប្រាក់!..");
                         $('.sp-input').removeClass('spselected');
+                        
                         $("#txtAmount").addClass("spselected");
+                        isNewEnter = true;
                         return;
                     }
                     // $(".funPlay").click();
@@ -1578,7 +1583,7 @@
                         //  alert(data);
                         if (data.Status == "OK") {
                             $("#fdisplay").html("");
-                            $("#txtAmount").val("");
+                            //$("#txtAmount").val("");
                             //$("#spLoad").click();
                             loanPlay1();
                             $('#fdisplay').scrollTop($('#fdisplay').height())
@@ -1590,8 +1595,9 @@
                     $('.sp-input').removeClass('spselected');
                     $("#txtNum").val("");
                     $("#txtNum1").val("");
-                    $("#txtAmount").val("");
+                    //$("#txtAmount").val("");
                     $("#txtNum").addClass("spselected");
+                    isNewEnter = true;
                     //alert('Enter');
                 }
             }
@@ -1721,7 +1727,7 @@
                         //  alert(data);
                         if (data.Status == "OK") {
                             $("#fdisplay").html("");
-                            $("#txtAmount").val("");
+                            //$("#txtAmount").val("");
                             //$("#spLoad").click();
                             loanPlay1();
                             $('#fdisplay').scrollTop($('#fdisplay').height())
@@ -1838,7 +1844,11 @@
 
             }
         });
-
+        $("#btnShift").click(function (event) {
+            event.preventDefault();
+            //alert("#btnShift");
+            $("#mShift").modal("show");
+        });
         //Shift
         $(".kShift").click(function (event) {
             event.preventDefault();
@@ -1905,7 +1915,7 @@
                 //  alert(data);
                 if (data.Status == "OK") {
                     $("#fdisplay").html("");
-                    $("#txtAmount").val("");
+                    //$("#txtAmount").val("");
                     //$("#spLoad").click();
                     $("#spLoad").click();
                     $('#fdisplay').scrollTop($('#fdisplay').height())
@@ -1914,7 +1924,6 @@
                     //$('#dialogOrgMember #dialogContent').scrollTop(0);
                 }
             });
-
           
         });
 

@@ -1169,7 +1169,7 @@ namespace LTMS.Controllers
                     return Json(new { Result = "NO", Message = "សូមបញ្ចូលឈ្មោះភ្នាក់ងា!.." + "!" }, "application/json", JsonRequestBehavior.AllowGet);
                 }
 
-                var order = db.ViewAgencys.Where(x => x.AgencyName == _m.AgencyName).FirstOrDefault();
+                var order = db.ViewAgencys.Where(x => x.AgencyName.Trim() == _m.AgencyName.Trim() && x.PhoneNumber.Trim() == _m.PhoneNumber.Trim()).FirstOrDefault();
                 if (order != null)
                 {
                     return Json(new { Result = "NO", Message = "ឈ្មោះនេះមានរួចហើយ" + "!.." }, "application/json", JsonRequestBehavior.AllowGet);

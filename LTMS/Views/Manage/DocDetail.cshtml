@@ -9,8 +9,8 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <div class="col-xs-3">
-                <div class="input-group date row">
+            <div class="" style="width:125px;float: left;">
+                <div class="input-group date">
                     <div class="input-group-addon hidden-xs">
                         <i class="fa fa-calendar"></i>
                     </div>
@@ -18,8 +18,8 @@
                 </div>
                 <!-- /.input group -->
             </div>
-            <div class="col-xs-3">
-                <div class="input-group date row">
+            <div class="" style="width:125px;float: left;">
+                <div class="input-group date">
                     <div class="input-group-addon  hidden-xs">
                         <i class="fa fa-calendar"></i>
                     </div>
@@ -27,38 +27,39 @@
                 </div>
                 <!-- /.input group -->
             </div>
-            <div class="left float-left" style="float:left; width:89px;">
-                <select id="AgencyID" name="AgencyID"></select>
+            <div class="left float-left" style="float:left;width:100px;">
+                <select id="AgencyID" name="AgencyID" style="padding:4px;"></select>
             </div>
             <div class="left float-left">
                 <button class="btn" id="btnSearch" onclick="LoadList()">
                     <i class="glyphicon glyphicon-search"></i><span class="hidden-xs">ស្វែងរក</span>
                 </button><!-- /.input group -->
             </div>
-            <div>
-                
-                <div class="left" style="float:left;">
-                    <button type="button" id="btnPay" data-value="1" data-toggle="modal" data-target="#mPay"
-                            class="btn btn-sm">
-                        <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>កូនសង</span>
-                    </button>
-                    <!-- /.input group -->
+            <div class="clearfix" style="margin-top:15px;"></div>
+            <div class="col-lg-12 no-print">
+                <div class="left float-left">
+                    <div class="left" style="float:left;">
+                        <button type="button" id="btnPay" data-value="1" data-toggle="modal" data-target="#mPay"
+                                class="btn btn-default">
+                            <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>កូនសង</span>
+                        </button>
+                        <!-- /.input group -->
+                    </div>
+                    <div class="left" style="width:70px; float:left;">
+                        @*<button class="btn" id="btnSearch" onclick="Lend()">កូនខ្ចី</button>*@
+                        <button type="button" id="btnPay" data-value="1" data-toggle="modal" data-target="#modalL"
+                                class="btn btn-default">
+                            <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>កូនខ្ចី</span>
+                        </button>
+                        <!-- /.input group -->
+                    </div>
                 </div>
-                <div class="left" style="width:70px; float:left;">
-                    @*<button class="btn" id="btnSearch" onclick="Lend()">កូនខ្ចី</button>*@
-                    <button type="button" id="btnPay" data-value="1" data-toggle="modal" data-target="#modalL"
-                            class="btn btn-sm">
-                        <i class="fa fa-clock-o"></i> <span id="shift-text" data-shtext>កូនខ្ចី</span>
-                    </button>
-                    <!-- /.input group -->
-                </div>
-            </div>
-            <div class="row no-print">
-                <div class="col-xs-12">
+                <div class="left float-left">
                     <button class="btn btn-default" onclick="printDiv()"><i class="fa fa-print"></i> Print</button>
-
                 </div>
+               
             </div>
+            <p class="clearfix" style="margin-top:15px;"></p>
         </section>
         <!-- Main content -->
         <section class="invoice" id="DivIdToPrint">
@@ -214,7 +215,6 @@
     </div>
 </div>
 @section Scripts
-
 {
     <div>
         <script src="~/Scripts/spjs/spHelpers.js"></script>
@@ -222,8 +222,7 @@
 
         var date = new Date();
         var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        //var today1 = date.getDay() + '-' + date.getMonth() + '-' + date.getYear();
-
+        //var today1 = date.getDay() + '-' + date.getMonth() + '-' + date.getYear()
         var end = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
         $('#FDate').datepicker({
